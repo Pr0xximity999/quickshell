@@ -1,4 +1,4 @@
 {
-    "clockTextColor": "black",
-    "clockTextSize": 11
+    "clockTextColor": "#000000",
+    "clockTextSize": 15
 }

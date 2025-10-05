@@ -39,7 +39,7 @@ PanelWindow {
             anchors.centerIn: parent
             font.pointSize: Config.data.clockTextSize
             color: Config.data.clockTextColor
-            onColorChanged: console.log(color.toString())
+            onColorChanged: Config.data.clockTextColor = color
         }
 
         ColorPicker {
