@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
+import Quickshell.Services.Mpris
 
 PanelWindow {
     id: panel
@@ -32,6 +32,20 @@ PanelWindow {
                 Config.data.clockTextSize += wheel.angleDelta.y / 100
             }
         }
+        
+        Rectangle {
+            id: playerBox
+            width: 70
+            height: 40
+            color: "gray"
+            property MprisPlayer player
+            opacity: 0 //tmporary
+
+            Text{
+                id: playerText
+                text: playerBox.player.trackTitle     
+            }
+        }
 
         ClockWidget {
             id: clock
@@ -46,6 +60,7 @@ PanelWindow {
             id: colorPicker
             target: clock
             opacity: 0
+            padding: 4
         }
 
         states: [
