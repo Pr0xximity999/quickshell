@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
-import Quickshell.Services.Mpris
+
+import "widgets"
 
 PanelWindow {
     id: panel
@@ -18,7 +19,7 @@ PanelWindow {
     Rectangle {
         id: page
         width: 480
-        height: 30
+        height: 60
         bottomLeftRadius: 20
         bottomRightRadius: 20
 
@@ -33,19 +34,7 @@ PanelWindow {
             }
         }
         
-        Rectangle {
-            id: playerBox
-            width: 70
-            height: 40
-            color: "gray"
-            property MprisPlayer player
-            opacity: 0 //tmporary
-
-            Text{
-                id: playerText
-                text: playerBox.player.trackTitle     
-            }
-        }
+        MediaPlayer{}
 
         ClockWidget {
             id: clock
@@ -82,7 +71,7 @@ PanelWindow {
                 SequentialAnimation {
                     NumberAnimation {
                         properties: "height"
-                        duration: 500
+                        duration: 100
                         easing.type: Easing.InOutQuad
                     }
                     NumberAnimation {
