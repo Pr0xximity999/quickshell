@@ -8,13 +8,16 @@ Item {
 
     Grid{
         columns: 1
+        spacing: 10
         horizontalItemAlignment: Grid.AlignLeft
         Text{
             id: playerText
             width: root.width
-            text: root.player.trackTitle ?? "text"  
+
+            text: root.getTrackText() ?? "text"  
             wrapMode: Text.Wrap
         }
+
         Image
         {
             id: trackArt
@@ -24,5 +27,23 @@ Item {
             sourceSize.width: root.width
             sourceSize.height: root.height
         }
+        
+        Rectangle {
+            id: progessBar
+            height: 20
+            width: root.width
+            radius: 5
+            color: "grey"
+            Rectangle {
+                height: parent.height
+                width: parent.width / root.player.length * root.player.position
+                radius: 5
+                color: "black"
+            }
+        }
+    }
+
+    function getTrackText(): string {
+        return `<${root.player.identity}>\n${root.player.trackArtist}:\n${root.player.trackTitle}`
     }
 }

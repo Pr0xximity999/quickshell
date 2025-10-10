@@ -84,7 +84,7 @@ Variants {
                                 easing.type: Easing.InOutQuad
                             }
                             NumberAnimation {
-                                properties: "opacity"
+                                properties: "opacity, width"
                                 duration: 200
                                 easing.type: Easing.Bezier
                             }

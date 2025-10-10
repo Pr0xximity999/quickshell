@@ -13,11 +13,11 @@ Item{
 
     Grid{
         columns: 2
-        spacing: 2
+        spacing: 10
         horizontalItemAlignment: Grid.AlignHCenter
         verticalItemAlignment: Grid.AlignVCenter
         anchors.centerIn: parent
-
+        
         ClockPanel{
             id: clock
             implicitWidth: this.clock.width
