@@ -1,8 +1,7 @@
 import Quickshell
-import "topbar"
-import "singletons"
+import qs.topbar
+import qs.singletons
 
-Scope {
-    FocusPopoutPanel {
-    }
+ShellRoot {
+    TopBar {}
 }

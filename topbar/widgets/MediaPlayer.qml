@@ -2,36 +2,27 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Mpris
 
+Item {
+    id: root
+    required property MprisPlayer player
 
-Rectangle {
-    id: playerBox
-    width: 70
-    height: 40
-    color: "green"
-    property int activePlayer: 0
-    property list<MprisPlayer> players : Mpris.players.values
-    property MprisPlayer player: players[activePlayer]
-
-    
-    MouseArea{
-        id: pauseArea
-        anchors.fill: parent
-        onClicked: () => {
-            playerBox.player.togglePlaying();
+    Grid{
+        columns: 1
+        horizontalItemAlignment: Grid.AlignLeft
+        Text{
+            id: playerText
+            width: root.width
+            text: root.player.trackTitle ?? "text"  
+            wrapMode: Text.Wrap
         }
-    }
-
-    Image
-    {
-        id: trackArt
-        source: playerBox.player.trackArtUrl
-        asynchronous: true
-        fillMode: Image.PreserveAspectCrop
-        sourceSize.width: playerBox.width
-        sourceSize.height: playerBox.height
-    }
-    Text{
-        id: playerText
-        text: playerBox.player.trackTitle ?? "text"  
+        Image
+        {
+            id: trackArt
+            source: root.player.trackArtUrl
+            asynchronous: true
+            fillMode: Image.PreserveAspectCrop
+            sourceSize.width: root.width
+            sourceSize.height: root.height
+        }
     }
 }

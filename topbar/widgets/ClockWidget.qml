@@ -1,6 +1,14 @@
 import QtQuick
-import "root:/singletons"
+import Quickshell
 
-Text {
-    text: Clock.time // Clock.qml
+import qs.singletons
+
+Item{
+    id: root
+    property alias text: text
+
+    Text {
+        id: text
+        text: Clock.time
+    }
 }
