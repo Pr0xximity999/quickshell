@@ -45,7 +45,7 @@ Item {
             height: 15
             Column{
                 Text{
-                    text: `${Calculations.formatSeconds(root.player.position, "hh:mm:ss")}/${Calculations.formatSeconds(root.player.length, "mm:ss")}`
+                    text: `${Calculations.formatSeconds(root.player.position, "mm:ss")}/${Calculations.formatSeconds(root.player.length, "mm:ss")}`
                 }
                 ProgressBar{
                     max: root.player.length
