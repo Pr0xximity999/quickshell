@@ -29,15 +29,13 @@ Variants {
                 id: background
                 width: 480
                 height: 30
-                color: "beige"
+                color: '#90b865'
                 bottomLeftRadius: 20
                 bottomRightRadius: 20
                 border{
-                    color: "black"
+                    color: "#143601"
                     width: 2
                 }
-
-
 
                 MouseArea {
                     id: mouseArea
@@ -61,8 +59,8 @@ Variants {
                         name: "focussed"
                         when: mouseArea.containsMouse
                         PropertyChanges {
-                            background.height: 250
-                            panels.y: 0
+                            background.height: 350
+                            panels.y: -background.height / 10
                             panels.media.opacity: 1
                             panels.media.width: 100
 
@@ -79,7 +77,7 @@ Variants {
                         reversible: true
                         SequentialAnimation {
                             NumberAnimation {
-                                properties: "height"
+                                properties: "height, y"
                                 duration: 100
                                 easing.type: Easing.InOutQuad
                             }
