@@ -29,15 +29,13 @@ Variants {
                 id: background
                 width: 480
                 height: 30
-                color: "beige"
+                color: "#73A942"
                 bottomLeftRadius: 20
                 bottomRightRadius: 20
                 border{
-                    color: "black"
+                    color: "#143601"
                     width: 2
                 }
-
-
 
                 MouseArea {
                     id: mouseArea
@@ -61,7 +59,7 @@ Variants {
                         name: "focussed"
                         when: mouseArea.containsMouse
                         PropertyChanges {
-                            background.height: 250
+                            background.height: 350
                             panels.y: 0
                             panels.media.opacity: 1
                             panels.media.width: 100
