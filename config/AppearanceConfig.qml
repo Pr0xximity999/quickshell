@@ -22,11 +22,18 @@ JsonObject{
     }
 
     component Color: JsonObject {
-        property string back: "#2D353B"
-        property string front: "#3C444A"
-        property string text: "#C8BA9E"
+        property string primary: "#2D353B"
+        property string secondary: "#3C444A"
+        property string lightGrey: "#C8BA9E"
+        property string light: "#A7C080"
+
+
+        property string back: primary
+        property string front: secondary
+        property string text: lightGrey
+        property string active: light
+        property string inactive: light
+        property string selected: light
+        property string unselected: secondary
     }
-
-    
-
 }
