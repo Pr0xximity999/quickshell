@@ -14,8 +14,6 @@ Item{
         width: this.text.width
         height: root.height
 
-        text.font.pointSize: Appearance.clock.size
-        text.color: Appearance.clock.color
-        onTextChanged: Appearance.clock.color = text.color
+        text.font.pointSize: Appearance.textSize.normal
     }
 }

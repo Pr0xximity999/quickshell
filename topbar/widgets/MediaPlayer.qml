@@ -2,6 +2,8 @@ import QtQuick
 import Quickshell.Services.Mpris
 
 import qs.utils
+import qs.components
+import qs.config
 
 
 Item {
@@ -23,11 +25,10 @@ Item {
     
     Column{
         spacing: 10
-        Text{
+        StyledText{
             id: playerText
             width: trackArt.width
 
-            color: "#C8BA9E"
             font.bold: true
 
             text: root.getTrackText() ?? "text"  
@@ -40,15 +41,17 @@ Item {
             source: root.player.trackArtUrl
             asynchronous: true
             fillMode: Image.PreserveAspectCrop
-            sourceSize.width: root.width
-            sourceSize.height: 100
+            sourceSize.width: Appearance.iconSize.medium
+            sourceSize.height: Appearance.iconSize.medium
+            antialiasing: true
         }
+        
         Item{
             id: musicProgress
             width: root.width
             height: 15
             Column{
-                Text{
+                StyledText{
                     text: `${Calculations.formatSeconds(root.player.position, "mm:ss")}/${Calculations.formatSeconds(root.player.length, "mm:ss")}`
                 }
                 ProgressBar{

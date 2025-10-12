@@ -4,6 +4,7 @@ import Quickshell
 
 Singleton{
     // This purely exists as a shorthand way to write Config.appearance.[anything]
-    property AppearanceConfig.TextSize text: Config.appearance.textSize
-    property AppearanceConfig.ClockData clock: Config.appearance.clockData
+    property AppearanceConfig.TextSize textSize: Config.appearance.textSize
+    property AppearanceConfig.IconSize iconSize: Config.appearance.iconSize
+    property AppearanceConfig.Color color: Config.appearance.color
 }

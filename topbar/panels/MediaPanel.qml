@@ -23,6 +23,7 @@ Item {
         }
     }
     ColumnLayout{
+        spacing: 10
         MediaPlayer{
             id: mediaPlayer
             player: root.activePlayer

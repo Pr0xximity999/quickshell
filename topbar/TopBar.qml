@@ -29,11 +29,11 @@ Variants {
                 id: background
                 width: 480
                 height: 30
-                color: '#3C444A'
+                color: Appearance.color.back
                 bottomLeftRadius: 20
                 bottomRightRadius: 20
                 border{
-                    color: "#143601"
+                    color: Appearance.color.front
                     width: 2
                 }
 
@@ -41,9 +41,6 @@ Variants {
                     id: mouseArea
                     anchors.fill: parent
                     hoverEnabled: true
-                    onWheel: (wheel) => {
-                        Appearance.clock.size += wheel.angleDelta.y / 100
-                    }
                 }
 
                 Panels{
@@ -59,13 +56,10 @@ Variants {
                         name: "focussed"
                         when: mouseArea.containsMouse
                         PropertyChanges {
-                            background.height: 350
-                            panels.y: -background.height / 10
+                            background.height: 400
+                            panels.y: -background.height / 3
                             panels.media.opacity: 1
                             panels.media.width: 100
-
-                            panels.picker.opacity: 1
-                            panels.picker.height: 100
                         }
                     }
                 ]
