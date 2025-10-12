@@ -1,7 +1,6 @@
 import QtQuick
-import Quickshell
 
-import qs.topbar.config
+import qs.config
 import qs.topbar.widgets
 
 Item{
@@ -15,8 +14,8 @@ Item{
         width: this.text.width
         height: root.height
 
-        text.font.pointSize: Config.data.clockTextSize
-        text.color: Config.data.clockTextColor
-        text.onColorChanged: Config.data.clockTextColor = text.color
+        text.font.pointSize: Appearance.clock.size
+        text.color: Appearance.clock.color
+        onTextChanged: Appearance.clock.color = text.color
     }
 }

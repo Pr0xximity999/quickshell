@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell
 
-import qs.singletons
+import qs.data
 
 Item{
     id: root

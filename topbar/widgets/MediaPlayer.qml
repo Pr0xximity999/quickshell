@@ -1,7 +1,8 @@
 import QtQuick
 import Quickshell.Services.Mpris
 
-import qs.singletons
+import qs.utils
+
 
 Item {
     id: root
@@ -24,7 +25,10 @@ Item {
         spacing: 10
         Text{
             id: playerText
-            width: root.width
+            width: trackArt.width
+
+            color: "#C8BA9E"
+            font.bold: true
 
             text: root.getTrackText() ?? "text"  
             wrapMode: Text.Wrap

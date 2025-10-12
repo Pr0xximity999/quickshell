@@ -2,14 +2,14 @@ import QtQuick
 import Quickshell
 
 import qs.topbar.panels
-import qs.topbar.config
+import qs.config
 
 
 Variants {
     model: Quickshell.screens
 
     Scope {
-        id: scope
+        id: scopeqs
         required property ShellScreen modelData
         
         PanelWindow {
@@ -29,7 +29,7 @@ Variants {
                 id: background
                 width: 480
                 height: 30
-                color: '#90b865'
+                color: '#3C444A'
                 bottomLeftRadius: 20
                 bottomRightRadius: 20
                 border{
@@ -42,7 +42,7 @@ Variants {
                     anchors.fill: parent
                     hoverEnabled: true
                     onWheel: (wheel) => {
-                        Config.data.clockTextSize += wheel.angleDelta.y / 100
+                        Appearance.clock.size += wheel.angleDelta.y / 100
                     }
                 }
 

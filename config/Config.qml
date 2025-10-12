@@ -1,16 +1,17 @@
-pragma ComponentBehavior: Bound
 pragma Singleton
 
 import Quickshell
 import Quickshell.Io
 
+import qs.utils
+
 Singleton {
     id: root
-    property alias data: data
+    readonly property alias appearance: adapter.appearance
 
     FileView {
         id: file
-        path: "./config.json"
+        path: `${Paths.config}/quickshell/config.json`
 
         // Updates data if file changed
         watchChanges: true
@@ -20,9 +21,8 @@ Singleton {
         onAdapterUpdated: writeAdapter()
 
         JsonAdapter{
-            id: data
-            property int clockTextSize: 12
-            property string clockTextColor: "black"
+            id: adapter
+            property AppearanceConfig appearance: AppearanceConfig{}
         }
     }
 }
