@@ -26,6 +26,7 @@ JsonObject{
         property string secondary: "#3C444A"
         property string lightGrey: "#C8BA9E"
         property string light: "#A7C080"
+        property string black: '#1a1f22'
 
 
         property string back: primary

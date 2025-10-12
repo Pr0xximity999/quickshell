@@ -1,5 +1,6 @@
 import QtQuick
-import Quickshell
+
+import qs.config
 
 Item {
     id: root
@@ -12,13 +13,13 @@ Item {
         height: root.height
         width: root.width
         radius: 5
-        color: "grey"
+        color: Appearance.color.black
         Rectangle {
             id: currentProgress
             height: root.height
             width: root.width / root.max * root.current
             radius: 5
-            color: "black"
+            color: Appearance.color.light
         }
     }
 }

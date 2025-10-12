@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import Quickshell.Services.Mpris
 
 import qs.utils
@@ -10,7 +11,7 @@ Item {
     id: root
     required property MprisPlayer player
 
-    implicitHeight: playerText.height + trackArt.height + musicProgress.height + 20
+    implicitHeight: playerText.height + trackArt.height + musicProgress.height + 50
 
     // Manually update the player's position since it wont update by default (to save cpu)
     Timer{
@@ -32,7 +33,7 @@ Item {
             font.bold: true
 
             text: root.getTrackText() ?? "text"  
-            wrapMode: Text.Wrap
+            wrapMode: Text.WrapAnywhere
         }
 
         Image
@@ -45,7 +46,7 @@ Item {
             sourceSize.height: Appearance.iconSize.medium
             antialiasing: true
         }
-        
+
         Item{
             id: musicProgress
             width: root.width
@@ -54,7 +55,7 @@ Item {
                 StyledText{
                     text: `${Calculations.formatSeconds(root.player.position, "mm:ss")}/${Calculations.formatSeconds(root.player.length, "mm:ss")}`
                 }
-                ProgressBar{
+                StyledProgressBar{
                     max: root.player.length
                     current: root.player.position
                     
