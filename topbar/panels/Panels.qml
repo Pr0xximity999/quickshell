@@ -1,7 +1,6 @@
 import QtQuick
 
 import qs.topbar.panels
-import qs.topbar.widgets
 
 Item{
     id: root
@@ -18,15 +17,14 @@ Item{
         
         ClockPanel{
             id: clock
-            implicitWidth: this.clock.width
-            height: 100
+            implicitWidth: this.clock.width + 50
+            implicitHeight:  Math.min(100, root.height)
         }
 
         MediaPanel{
             id: media       
             width: 0
-            height: 100
-            
+            height: Math.min(100, root.height)
             opacity: 0
         }
     }
