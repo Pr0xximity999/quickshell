@@ -1,6 +1,6 @@
 import QtQuick
-import QtQuick.Controls
 import Quickshell.Services.Mpris
+import Quickshell.Widgets
 
 import qs.utils
 import qs.components
@@ -41,11 +41,10 @@ Item {
             id: trackArt
             source: root.player.trackArtUrl
             asynchronous: true
-            fillMode: Image.PreserveAspectCrop
-            sourceSize.width: Appearance.iconSize.medium
-            sourceSize.height: Appearance.iconSize.medium
-            antialiasing: true
-        }
+            sourceSize.width: parent.width
+            sourceSize.height: parent.height
+            }
+        
 
         Item{
             id: musicProgress
