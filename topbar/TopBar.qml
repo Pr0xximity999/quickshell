@@ -9,20 +9,25 @@ Variants {
     model: Quickshell.screens
 
     Scope {
-        id: scopeqs
+        id: root
         required property ShellScreen modelData
         
         PanelWindow {
             id: window
             implicitWidth: background.width
-            implicitHeight: background.height + 3 //prevents smearing
+            implicitHeight: 400
             color: "transparent"
 
             // Makes the window overlay the screen
             exclusionMode: ExclusionMode.Ignore
 
-            anchors {
+            anchors{
                 top: true
+            }
+
+            mask: Region{
+                item: background
+                intersection: Intersection.Intersect
             }
 
             Rectangle {
@@ -37,24 +42,21 @@ Variants {
                     width: 2
                 }
 
-                MouseArea {
+                HoverHandler {
                     id: mouseArea
-                    anchors.fill: parent
-                    hoverEnabled: true
                 }
 
                 Panels{
                     id: panels
                     width: parent.width
                     height: parent.height
-                    y: parent.height * 1.3
                 }
                 
 
                 states: [
                     State {
                         name: "focussed"
-                        when: mouseArea.containsMouse
+                        when: mouseArea.hovered
                         PropertyChanges {
                             background.height: 400
                             panels.y: -background.height / 3
@@ -71,7 +73,7 @@ Variants {
                         reversible: true
                         SequentialAnimation {
                             NumberAnimation {
-                                properties: "height, y"
+                                properties: "height, implicitHeight, y"
                                 duration: 100
                                 easing.type: Easing.InOutQuad
                             }
