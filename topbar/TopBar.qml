@@ -27,7 +27,6 @@ Variants {
 
             mask: Region{
                 item: background
-                intersection: Intersection.Intersect
             }
 
             Rectangle {
@@ -74,7 +73,7 @@ Variants {
                         SequentialAnimation {
                             NumberAnimation {
                                 properties: "height, implicitHeight, y"
-                                duration: 100
+                                duration: 200
                                 easing.type: Easing.InOutQuad
                             }
                             NumberAnimation {
