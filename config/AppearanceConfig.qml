@@ -3,6 +3,7 @@ import Quickshell.Io
 JsonObject{
     property TextSize textSize: TextSize{}
     property IconSize iconSize: IconSize{}
+    property Margin margin: Margin{}
     property Color color: Color{}
 
 
@@ -12,6 +13,7 @@ JsonObject{
         property int normal: 14 * scale
         property int large: 16 * scale
     }
+
     component IconSize: JsonObject{
         property int scale: 1
         property int extra_small: 20 * scale
@@ -19,6 +21,13 @@ JsonObject{
         property int medium: 100 * scale
         property int large: 150 * scale
         property int extra_large: 250 * scale
+    }
+
+    component Margin: JsonObject {
+        property int scale: 1
+        property int small: 5
+        property int medium: 15
+        property int large: 25
     }
 
     component Color: JsonObject {
