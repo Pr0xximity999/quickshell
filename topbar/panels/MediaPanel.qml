@@ -7,13 +7,16 @@ import Quickshell
 import Quickshell.Services.Mpris
 
 import qs.topbar.widgets
+import qs.components
 
 
-Item {
+StyledRectangle {
     id: root
     property int pNum: 0
     property list<MprisPlayer> players : Mpris.players.values
     property MprisPlayer activePlayer: players[pNum]
+
+    implicitHeight: mediaPlayer.height + playerList.height
     
     MouseArea{
         id: pauseArea
