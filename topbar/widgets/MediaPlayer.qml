@@ -36,15 +36,19 @@ Item {
             wrapMode: Text.WrapAnywhere
         }
 
-        Image
-        {
-            id: trackArt
-            source: root.player.trackArtUrl
-            asynchronous: true
-            sourceSize.width: parent.width
-            sourceSize.height: parent.height
+        ClippingRectangle{
+            radius: Infinity
+            implicitWidth: Appearance.iconSize.medium
+            implicitHeight: Appearance.iconSize.medium
+            Image
+            {
+                id: trackArt
+                source: root.player.trackArtUrl
+                asynchronous: true
+                sourceSize.width: parent.width
+                sourceSize.height: parent.height
             }
-        
+        }
 
         Item{
             id: musicProgress
