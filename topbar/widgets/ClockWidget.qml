@@ -1,5 +1,4 @@
 import QtQuick
-import Quickshell
 
 import qs.data
 import qs.components
@@ -7,6 +6,9 @@ import qs.components
 Item{
     id: root
     property alias text: text
+
+    implicitHeight: text.height
+    implicitWidth: text.width
 
     StyledText {
         id: text

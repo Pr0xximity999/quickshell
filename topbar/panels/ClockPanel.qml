@@ -9,10 +9,14 @@ StyledRectangle{
     property alias clock : clock
     property alias text : clock.text
 
+    implicitWidth: clock.width
+    implicitHeight: clock.height
+
     ClockWidget {
         id: clock
-        width: this.text.width
-        height: root.height
+        width: text.width + Appearance.padding.medium
+        height: text.height + Appearance.padding.small
         text.font.pointSize: Appearance.textSize.normal
+        text.wrapMode: Text.Wrap
     }
 }

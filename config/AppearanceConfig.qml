@@ -3,7 +3,7 @@ import Quickshell.Io
 JsonObject{
     property TextSize textSize: TextSize{}
     property IconSize iconSize: IconSize{}
-    property Margin margin: Margin{}
+    property Padding padding: Padding{}
     property Color color: Color{}
 
 
@@ -23,11 +23,13 @@ JsonObject{
         property int extra_large: 250 * scale
     }
 
-    component Margin: JsonObject {
+    component Padding: JsonObject {
         property int scale: 1
-        property int small: 5
-        property int medium: 15
-        property int large: 25
+        property int extra_small: 5
+        property int small: 10
+        property int medium: 20
+        property int large: 30
+        property int extra_large: 40
     }
 
     component Color: JsonObject {

@@ -3,7 +3,6 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Services.Mpris
 
 import qs.topbar.widgets
@@ -15,23 +14,14 @@ StyledRectangle {
     property int pNum: 0
     property list<MprisPlayer> players : Mpris.players.values
     property MprisPlayer activePlayer: players[pNum]
-
-    implicitHeight: mediaPlayer.height + playerList.height
-    
-    MouseArea{
-        id: pauseArea
-        anchors.fill: parent
-        onClicked: () => {
-            root.activePlayer.togglePlaying();
-        }
-    }
     ColumnLayout{
+        id: itemColumn
         spacing: 10
         MediaPlayer{
             id: mediaPlayer
             player: root.activePlayer
-
-            width: 100
+            width: root.width
+            Layout.fillHeight: true
         }
         Repeater {
             id: playerList
@@ -41,7 +31,8 @@ StyledRectangle {
             MenuItem {
                 required property MprisPlayer modelData
 
-                width: root.width
+                Layout.fillWidth: true
+                Layout.fillHeight: true
 
                 text: modelData.identity
                 highlighted: modelData === root.activePlayer

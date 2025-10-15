@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import QtCore
 
 import qs.topbar.panels
 import qs.config
@@ -29,6 +30,7 @@ Variants {
                 item: background
             }
 
+
             Rectangle {
                 id: background
                 width: 480
@@ -54,30 +56,35 @@ Variants {
 
                 states: [
                     State {
+                        id: state1
                         name: "focussed"
                         when: mouseArea.hovered
                         PropertyChanges {
                             background.height: 400
-                            panels.y: -background.height / 3
                             panels.media.opacity: 1
-                            panels.media.width: 100
+                            panels.media.width: 150
+                            panels.anchors.margins: Appearance.padding.small
                         }
                     }
                 ]
 
                 transitions: [
                     Transition {
-                        from: ""
                         to: "focussed"
                         reversible: true
                         SequentialAnimation {
                             NumberAnimation {
-                                properties: "height, implicitHeight, y"
+                                properties: "height, y, margins"
                                 duration: 200
                                 easing.type: Easing.InOutQuad
                             }
                             NumberAnimation {
-                                properties: "opacity, width"
+                                properties: "width"
+                                duration: 100
+                                easing.type: Easing.Bezier
+                            }
+                            NumberAnimation {
+                                properties: "opacity"
                                 duration: 200
                                 easing.type: Easing.Bezier
                             }

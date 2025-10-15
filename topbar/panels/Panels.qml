@@ -1,30 +1,55 @@
 import QtQuick
+import QtQuick.Layouts
 
 import qs.topbar.panels
+import qs.config
+import qs.components
 
 Item{
     id: root
+    readonly property alias clock: clockPanel
+    readonly property alias media: mediaPanel
+    property alias itemRow: itemRow
 
-    readonly property alias clock: clock
-    readonly property alias media: media
+    anchors.fill: parent
 
-    Grid{
-        columns: 2
+    width: root.width
+    height: root.height
+
+    RowLayout{
+        id: itemRow
         spacing: 10
-        horizontalItemAlignment: Grid.AlignHCenter
-        verticalItemAlignment: Grid.AlignVCenter
-        anchors.centerIn: parent
-        
-        ClockPanel{
-            id: clock
-            implicitWidth: this.clock.width + 50
-            implicitHeight:  Math.min(100, root.height)
+        height: root.height
+        anchors{
+            top: root.top
+            horizontalCenter: root.horizontalCenter
+        }
+
+        ColumnLayout{
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            width: 1
+            ClockPanel{
+                id: clockPanel
+                Layout.preferredWidth: width
+                Layout.preferredHeight:  Math.min(30, root.height)
+                Layout.alignment: Qt.AlignHCenter
+            }
+            StyledRectangle{
+                id: notifications
+                color: Appearance.color.secondary
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
         }
 
         MediaPanel{
-            id: media       
+            id: mediaPanel
             width: 0
-            height: Math.min(100, root.height)
+            Layout.preferredWidth: width
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignTop
+
             opacity: 0
         }
     }
