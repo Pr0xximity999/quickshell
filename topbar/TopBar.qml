@@ -62,6 +62,7 @@ Variants {
                         PropertyChanges {
                             background.height: 400
                             panels.media.opacity: 1
+                            panels.testing_zone.opacity: 1
                             panels.media.width: 150
                             panels.anchors.margins: Appearance.padding.small
                         }
