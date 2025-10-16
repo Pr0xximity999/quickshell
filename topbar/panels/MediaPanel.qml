@@ -39,7 +39,6 @@ StyledRectangle {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     text: modelData.identity
-                    hoverEnabled: false
                     highlighted: modelData === root.activePlayer
                     onClicked: root.activePlayer = modelData
                 }
