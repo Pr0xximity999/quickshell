@@ -35,6 +35,7 @@ JsonObject{
     component Color: JsonObject {
         property string primary: "#2D353B"
         property string secondary: "#3C444A"
+        property string grey: "#868D80"
         property string lightGrey: "#C8BA9E"
         property string light: "#A7C080"
         property string black: '#1a1f22'
