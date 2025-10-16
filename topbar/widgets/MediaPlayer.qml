@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell.Services.Mpris
 import Quickshell.Widgets
 
@@ -14,9 +15,6 @@ Item {
     implicitHeight: itemColumn.height
     implicitWidth: itemColumn.width
 
-    width: root.width
-    height: root.height
-
     // Manually update the player's position since it wont update by default (to save cpu)
     Timer{
         id: positionUpdater
@@ -28,17 +26,21 @@ Item {
         onTriggered: root.player.positionChanged()
     }
     
-    Column{
+    ColumnLayout{
         id: itemColumn
         spacing: 10
+        width: root.width
 
+        Component.onCompleted: {
+            children.forEach((child) => {  
+                child.Layout.alignment= Qt.AlignCenter
+            })
+        }
         
         StyledText{
             id: playerText
-            width: root.width
-            height: 75
-
-            font.bold: true
+            Layout.preferredWidth: itemColumn.width
+            Layout.preferredHeight: 80
 
             text: root.getTrackText() ?? "text"  
         }

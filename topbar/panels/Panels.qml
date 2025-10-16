@@ -13,13 +13,11 @@ Item{
 
     anchors.fill: parent
 
-    width: root.width
-    height: root.height
-
     RowLayout{
         id: itemRow
         spacing: 10
         height: root.height
+        width: root.width
         anchors{
             top: root.top
             horizontalCenter: root.horizontalCenter

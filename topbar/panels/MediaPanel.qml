@@ -14,30 +14,36 @@ StyledRectangle {
     property int pNum: 0
     property list<MprisPlayer> players : Mpris.players.values
     property MprisPlayer activePlayer: players[pNum]
+
     ColumnLayout{
         id: itemColumn
-        spacing: 10
+        width: parent.width
+        height: parent.height
         MediaPlayer{
             id: mediaPlayer
             player: root.activePlayer
-            width: root.width
+            width: itemColumn.width
             Layout.fillHeight: true
+            height: 7
         }
-        Repeater {
-            id: playerList
+        ColumnLayout{
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            height: 3
+            Repeater {
+                id: playerList
+                model: root.players
+                Component.onCompleted: console.log(root.players.length)
 
-            model: root.players
-
-            MenuItem {
-                required property MprisPlayer modelData
-
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                text: modelData.identity
-                highlighted: modelData === root.activePlayer
-                hoverEnabled: false
-                onTriggered: root.activePlayer = modelData
+                MenuItem {
+                    required property MprisPlayer modelData
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    text: modelData.identity
+                    highlighted: modelData === root.activePlayer
+                    hoverEnabled: false
+                    onTriggered: root.activePlayer = modelData
+                }
             }
         }
     }
