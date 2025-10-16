@@ -62,6 +62,7 @@ Item {
                 asynchronous: true
                 sourceSize.width: parent.width
                 sourceSize.height: parent.height
+                anchors.fill: parent
                 fillMode: Image.PreserveAspectCrop
 
                 Rectangle{
