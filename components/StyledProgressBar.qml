@@ -17,7 +17,7 @@ Item {
         Rectangle {
             id: currentProgress
             height: root.height
-            width: root.width / root.max * root.current
+            width: Math.min(root.width / root.max * root.current, maxProgress.width)
             radius: 5
             color: Appearance.color.light
         }
