@@ -32,7 +32,6 @@ StyledRectangle {
             Repeater {
                 id: playerList
                 model: root.players
-                Component.onCompleted: console.log(root.players.length)
 
                 StyledButton {
                     required property MprisPlayer modelData
