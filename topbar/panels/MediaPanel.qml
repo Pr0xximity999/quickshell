@@ -1,7 +1,6 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell.Services.Mpris
 
@@ -35,14 +34,14 @@ StyledRectangle {
                 model: root.players
                 Component.onCompleted: console.log(root.players.length)
 
-                MenuItem {
+                StyledButton {
                     required property MprisPlayer modelData
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     text: modelData.identity
-                    highlighted: modelData === root.activePlayer
                     hoverEnabled: false
-                    onTriggered: root.activePlayer = modelData
+                    highlighted: modelData === root.activePlayer
+                    onClicked: root.activePlayer = modelData
                 }
             }
         }
