@@ -19,6 +19,7 @@ Item{
             property bool isCurrent: modelData == root.clickedNum
             property bool isVisible: root.expand || isCurrent
             
+            highlighted: isCurrent
             width: root.width
             height: root.height
             z: isCurrent ? 1 : 0
@@ -47,7 +48,7 @@ Item{
                     name: "expanded"
                     when: root.expand 
                     PropertyChanges{
-                        button.y: root.height * (button.modelData - root.clickedNum)
+                        button.y: root.height * button.modelData
                         button.opacity: 1
                         button.visible: true
                     }
