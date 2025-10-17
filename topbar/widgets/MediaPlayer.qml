@@ -11,9 +11,6 @@ import qs.config
 Item {
     id: root
     required property MprisPlayer player
-    
-    implicitHeight: itemColumn.height
-    implicitWidth: itemColumn.width
 
     // Manually update the player's position since it wont update by default (to save cpu)
     Timer{
@@ -42,11 +39,11 @@ Item {
             Layout.preferredWidth: itemColumn.width
             Layout.preferredHeight: 80
 
-            text: root.getTrackText() ?? "text"  
+            text: root.player.trackTitle ?? "text"  
         }
 
         ClippingRectangle{
-            id: trackArt
+            id: trackArtBox
             radius: Infinity
             implicitWidth: Appearance.iconSize.medium
             implicitHeight: Appearance.iconSize.medium
@@ -58,7 +55,10 @@ Item {
             }
             Image
             {
+                id: trackArt
                 source: root.player.trackArtUrl
+                
+
                 asynchronous: true
                 sourceSize.width: parent.width
                 sourceSize.height: parent.height
@@ -94,9 +94,14 @@ Item {
             
         }
 
+        StyledText{
+            id: artistName
+            text: root.player.trackArtist
+        }
+
         Item{
             id: musicProgress
-            width: trackArt.width
+            width: trackArtBox.width
             height: 15
             Column{
                 StyledText{
@@ -111,9 +116,5 @@ Item {
                 }
             }
         }
-    }
-
-    function getTrackText(): string {
-        return `${root.player.trackArtist} - ${root.player.trackTitle}`
     }
 }

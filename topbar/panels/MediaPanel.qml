@@ -12,6 +12,7 @@ StyledRectangle {
     id: root
     property int pNum: 0
     property list<MprisPlayer> players : Mpris.players.values
+    property list<string> playerNames : players.map((player) => {return player.identity})
     property MprisPlayer activePlayer: players[pNum]
 
     ColumnLayout{
@@ -20,27 +21,20 @@ StyledRectangle {
         height: parent.height
         MediaPlayer{
             id: mediaPlayer
-            player: root.activePlayer
             width: itemColumn.width
             Layout.fillHeight: true
-            height: 7
-        }
-        ColumnLayout{
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            height: 3
-            Repeater {
-                id: playerList
-                model: root.players
 
-                StyledButton {
-                    required property MprisPlayer modelData
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    text: modelData.identity
-                    highlighted: modelData === root.activePlayer
-                    onClicked: root.activePlayer = modelData
-                }
+            player: root.activePlayer
+        }
+        Item{
+            Layout.fillWidth: true
+            Layout.preferredHeight: 80
+            CollapsableMenu{
+                anchors.top: parent.top
+                height: 25
+                width: parent.width
+                buttons: root.playerNames
+                onSelected: (number) => root.activePlayer = root.players[number]
             }
         }
     }
