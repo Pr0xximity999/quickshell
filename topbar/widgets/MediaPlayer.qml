@@ -6,11 +6,12 @@ import Quickshell.Widgets
 import qs.utils
 import qs.components
 import qs.config
+import qs.services
 
 
 Item {
     id: root
-    required property MprisPlayer player
+    property MprisPlayer player : MediaPlayers.activePlayer
 
     // Manually update the player's position since it wont update by default (to save cpu)
     Timer{
@@ -57,6 +58,7 @@ Item {
             {
                 id: trackArt
                 source: root.player.trackArtUrl
+                property string previousSource: ""
                 
 
                 asynchronous: true
@@ -80,6 +82,10 @@ Item {
                     onClicked: () => {
                         root.player.togglePlaying();
                     }
+                    onWheel: (mouse) => {
+                        trackArt.rotation += mouse.angleDelta.y / 20
+                        root.player.seek(mouse.angleDelta.y / 30)
+                    }
                 }
             }
             
@@ -97,6 +103,7 @@ Item {
         StyledText{
             id: artistName
             text: root.player.trackArtist
+            Layout.preferredWidth: trackArt.width
         }
 
         Item{

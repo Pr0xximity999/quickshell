@@ -8,6 +8,7 @@ import qs.utils
 Singleton {
     id: root
     readonly property alias appearance: adapter.appearance
+    readonly property alias service: adapter.service
 
     FileView {
         id: file
@@ -23,6 +24,7 @@ Singleton {
         JsonAdapter{
             id: adapter
             property AppearanceConfig appearance: AppearanceConfig{}
+            property ServiceConfig service: ServiceConfig{}
         }
     }
 }
