@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import qs.config
 
 Item{
     id: root
@@ -23,6 +24,11 @@ Item{
             width: root.width
             height: root.height
             z: isCurrent ? 1 : 0
+
+            topLeftRadius: isCurrent && !root.expand || modelData == 0 ? 5 : 0
+            topRightRadius: isCurrent && !root.expand || modelData == 0 ? 5 : 0
+            bottomLeftRadius: isCurrent && !root.expand || modelData == root.buttons.length - 1 ? 5 : 0
+            bottomRightRadius: isCurrent && !root.expand || modelData == root.buttons.length - 1 ? 5 : 0
 
             onClicked: {
                 root.clickedNum = modelData
@@ -64,7 +70,7 @@ Item{
                     NumberAnimation {
                         target: button
                         properties: "y"
-                        duration: 200
+                        duration: 150
                         easing.type: Easing.InOutQuad
                     } 
                 }
