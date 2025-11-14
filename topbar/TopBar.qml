@@ -15,7 +15,7 @@ Variants {
         
         PanelWindow {
             id: window
-            implicitWidth: background.width
+            implicitWidth: 800
             implicitHeight: 400
             color: "transparent"
 
@@ -33,11 +33,12 @@ Variants {
 
             Rectangle {
                 id: background
-                width: 480
-                height: 30
+                width: 300
+                height: 40
                 color: Appearance.color.back
                 bottomLeftRadius: 20
                 bottomRightRadius: 20
+                anchors.horizontalCenter: parent.horizontalCenter
                 border{
                     color: mouseArea.hovered ?  Appearance.color.front : "transparent"
                     width: 2
@@ -60,9 +61,11 @@ Variants {
                         name: "focussed"
                         when: mouseArea.hovered
                         PropertyChanges {
+                            background.width: 480
                             background.height: 400
                             panels.media.opacity: 1
                             panels.testing_zone.opacity: 1
+                            panels.clock.radius: 20
                             panels.media.width: 150
                             panels.anchors.margins: Appearance.padding.small
                         }
@@ -75,7 +78,7 @@ Variants {
                         reversible: true
                         SequentialAnimation {
                             NumberAnimation {
-                                properties: "height, y, margins"
+                                properties: "height, y, margins, radius"
                                 duration: 200
                                 easing.type: Easing.InOutQuad
                             }

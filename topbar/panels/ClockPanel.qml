@@ -12,6 +12,8 @@ StyledRectangle{
     implicitWidth: clock.width
     implicitHeight: clock.height
 
+    radius: 4
+
     ClockWidget {
         id: clock
         width: text.width + Appearance.padding.medium

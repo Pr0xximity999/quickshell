@@ -14,6 +14,7 @@ Item{
     property alias itemRow: itemRow
 
     anchors.fill: parent
+    anchors.margins: Appearance.padding.extra_small
 
     RowLayout{
         id: itemRow
@@ -32,7 +33,7 @@ Item{
             ClockPanel{
                 id: clockPanel
                 Layout.preferredWidth: width
-                Layout.preferredHeight:  Math.min(30, root.height)
+                Layout.preferredHeight:  35
                 Layout.alignment: Qt.AlignHCenter
             }
             StyledRectangle{
