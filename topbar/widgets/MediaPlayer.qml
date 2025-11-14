@@ -50,6 +50,7 @@ Item {
             implicitHeight: Appearance.iconSize.medium
             antialiasing: true
             contentInsideBorder: true
+            color: Appearance.color.back
             border{
                 color: Appearance.color.black
                 width: 2
@@ -83,8 +84,8 @@ Item {
                         root.player.togglePlaying();
                     }
                     onWheel: (mouse) => {
-                        trackArt.rotation += mouse.angleDelta.y / 20
-                        root.player.seek(mouse.angleDelta.y / 30)
+                        trackArt.rotation += mouse.angleDelta.y / 20;
+                        root.player.seek(mouse.angleDelta.y / 30);
                     }
                 }
             }

@@ -39,7 +39,7 @@ Variants {
                 bottomLeftRadius: 20
                 bottomRightRadius: 20
                 border{
-                    color: Appearance.color.front
+                    color: mouseArea.hovered ?  Appearance.color.front : "transparent"
                     width: 2
                 }
 
