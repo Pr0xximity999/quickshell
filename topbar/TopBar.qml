@@ -35,7 +35,7 @@ Variants {
                 id: background
                 width: 300
                 height: 40
-                color: Appearance.color.back
+                color: "transparent"
                 bottomLeftRadius: 20
                 bottomRightRadius: 20
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -63,6 +63,7 @@ Variants {
                         PropertyChanges {
                             background.width: 480
                             background.height: 400
+                            background.color: Appearance.color.back
                             panels.media.opacity: 1
                             panels.testing_zone.opacity: 1
                             panels.clock.radius: 20
@@ -77,6 +78,10 @@ Variants {
                         to: "focussed"
                         reversible: true
                         SequentialAnimation {
+                            ColorAnimation {
+                                properties: "color"
+                                duration: 2 //Instant, lower than 2 makes it not work
+                            }
                             NumberAnimation {
                                 properties: "height, y, margins, radius"
                                 duration: 200
