@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Services.Notifications
 
 import qs.topbar.panels
 import qs.config
@@ -42,6 +43,23 @@ Item{
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 opacity: 0
+                StyledRectangle{
+                    id: test_rectangle
+                    property var currentText: "hi"
+                    anchors{
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                    width: 200
+                    height: 200
+                    color: Appearance.color.back
+                    StyledText{
+                        id: notifiText
+                        text: test_rectangle.currentText
+                    }
+                    NotificationServer{
+                        id: notificationserver
+                    }
+                }
             }
         }
 

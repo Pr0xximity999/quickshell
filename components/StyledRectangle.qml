@@ -9,7 +9,7 @@ Rectangle{
     default property alias data: container.children
 
     color: Appearance.color.secondary
-    radius: 20
+    radius: 5
 
     Control{
         width: root.width

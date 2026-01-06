@@ -36,8 +36,8 @@ Variants {
                 width: 300
                 height: 40
                 color: "transparent"
-                bottomLeftRadius: 20
-                bottomRightRadius: 20
+                bottomLeftRadius: 5
+                bottomRightRadius: 5
                 anchors.horizontalCenter: parent.horizontalCenter
                 border{
                     color: mouseArea.hovered ?  Appearance.color.front : "transparent"
@@ -66,7 +66,6 @@ Variants {
                             background.color: Appearance.color.back
                             panels.media.opacity: 1
                             panels.testing_zone.opacity: 1
-                            panels.clock.radius: 20
                             panels.media.width: 150
                             panels.anchors.margins: Appearance.padding.small
                         }
