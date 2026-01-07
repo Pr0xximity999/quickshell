@@ -1,6 +1,8 @@
 import Quickshell
-import qs.topbar
+import qs.modules.topbar
+import qs.modules.notifs
 
 ShellRoot {
     TopBar {}
+    Notifs {}
 }

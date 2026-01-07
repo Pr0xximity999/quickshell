@@ -4,10 +4,12 @@ import Quickshell.Services.Notifications
 
 import qs.components
 import qs.config
+import qs.services
 
 Scope{
     id: root
     PanelWindow{
+        property Notifs modelData
         id: window
         implicitWidth: 300
         implicitHeight: 300
@@ -51,28 +53,10 @@ Scope{
                 onClicked: background.x_offset = background.width
             }
 
-            
-
             StyledText{
                 id: content
                 anchors.fill: parent
                 anchors.margins: Appearance.padding.extra_small
-            }
-
-            Item{
-                id: notificationHandler
-                
-                NotificationServer{
-                    id: notifServer                    
-
-                    onNotification: notif =>{
-                        notif.tracked = false
-                        console.log(notif.body)
-                        content.text = notif.summary + "\n" + notif.body
-
-                        background.x_offset = 0
-                    } 
-                }
             }
         }
     }
