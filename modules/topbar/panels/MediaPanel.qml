@@ -3,7 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 
-import qs.topbar.widgets
+import qs.modules.topbar.widgets
 import qs.components
 import qs.services
 

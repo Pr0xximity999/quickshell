@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell
 import QtCore
 
-import qs.topbar.panels
+import qs.modules.topbar.panels
 import qs.config
 
 
