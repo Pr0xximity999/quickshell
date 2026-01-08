@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import Quickshell
 import Quickshell.Services.Notifications
@@ -8,11 +10,10 @@ import qs.services
 
 Scope{
     id: root
-    PanelWindow{
-        property Notifs modelData
+    PanelWindow {
         id: window
-        implicitWidth: 300
-        implicitHeight: 300
+        implicitWidth: 250
+        implicitHeight: 150
         color: "transparent"
 
         // Makes the window overlay the screen
@@ -21,43 +22,96 @@ Scope{
         anchors{
             top: true
             right:true
-        }
-
-        mask: Region{
-            item: background
+            bottom:true
         }
 
         margins{
             top: 50
-            right: background.width - window.width - background.x_offset
+            bottom: 20
         }
-        
 
-        StyledRectangle{
-            id: background
+        mask: Region{
+            item: window.contentItem
+        }
+    
+        component Notif: StyledRectangle{
+            id: notif
             implicitWidth: 200
             implicitHeight: 100
+
+            opacity: 0
+
             property int x_offset: 0
+            required property Notification notification
 
             color: Appearance.color.back
+
+            Component.onCompleted: {
+                notif.opacity = 1
+            }
+
+            // notification.onClosed:{
+            //     destroyTimer.running = true  
+            // } 
+
             border{
                 color: Appearance.color.light
                 width: 2
             }
 
-            MouseArea{
-                id: clickarea
-                width: background.width
-                height: background.height
+            Item{
+                Timer {
+                    id: destroyTimer
+                    interval: 200
+                    onTriggered: 
+                    {
+                        notif.notification.dismiss()
+                        notif.destroy()
+                    }
+                }
+            }
 
-                onClicked: background.x_offset = background.width
+            MouseArea{        
+                id: clickarea
+                width: notif?.width
+                height: notif?.height
+
+                onClicked: () => {
+                    // notif.opacity = 0
+                    destroyTimer.running = true
+                }
             }
 
             StyledText{
                 id: content
                 anchors.fill: parent
                 anchors.margins: Appearance.padding.extra_small
+                text: notif.notification?.body ?? "You shouldn't be seeing this"
             }
+
+            Behavior on opacity {
+                NumberAnimation {duration: 200}
+            }
+        }
+        
+    }
+
+    Component{
+        id: notifComp
+        Notif{}
+    }
+    Connections{
+        target: NotifService
+        
+        function onNotification(n){
+            console.log(n.summary + ": " + n.body)
+
+            const notif = notifComp.createObject(
+                window.contentItem,
+                {
+                    notification: n
+                }
+            );
         }
     }
 }
