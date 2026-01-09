@@ -49,13 +49,14 @@ Scope{
         component Notif: StyledRectangle{
             id: notif
             property int x_offset: 0
-
             required property Notification notification
 
             implicitWidth: Appearance.itemWidth.notification
             implicitHeight: 100
             opacity: 0
             color: Appearance.color.back
+
+            x: 0 - x_offset
 
 
             Component.onCompleted: {
