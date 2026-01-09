@@ -1,5 +1,3 @@
-pragma ComponentBehavior: Bound
-
 import QtQuick
 import Quickshell
 import Quickshell.Services.Notifications
@@ -19,6 +17,12 @@ Scope{
         // Makes the window overlay the screen
         exclusionMode: ExclusionMode.Ignore
 
+        // Mouse event passtrough
+        mask: Region{
+            width: listview.width
+            height: listview.contentHeight
+        }
+
         anchors{
             top: true
             right:true
@@ -30,29 +34,34 @@ Scope{
             bottom: 20
         }
 
-        mask: Region{
-            item: window.contentItem
+        ListView{
+            id: listview
+            model: NotifService.notifications
+            anchors.fill: parent
+            spacing: Appearance.padding.small
+
+            delegate: Notif {
+                required property Notification modelData
+                notification: modelData
+            }
         }
-    
+ 
         component Notif: StyledRectangle{
             id: notif
-            implicitWidth: 200
-            implicitHeight: 100
-
-            opacity: 0
-
             property int x_offset: 0
+
             required property Notification notification
 
+            implicitWidth: Appearance.itemWidth.notification
+            implicitHeight: 100
+            opacity: 0
             color: Appearance.color.back
+
 
             Component.onCompleted: {
                 notif.opacity = 1
             }
 
-            // notification.onClosed:{
-            //     destroyTimer.running = true  
-            // } 
 
             border{
                 color: Appearance.color.light
@@ -66,7 +75,6 @@ Scope{
                     onTriggered: 
                     {
                         notif.notification.dismiss()
-                        notif.destroy()
                     }
                 }
             }
@@ -77,7 +85,7 @@ Scope{
                 height: notif?.height
 
                 onClicked: () => {
-                    // notif.opacity = 0
+                    notif.opacity = 0
                     destroyTimer.running = true
                 }
             }
@@ -86,32 +94,20 @@ Scope{
                 id: content
                 anchors.fill: parent
                 anchors.margins: Appearance.padding.extra_small
-                text: notif.notification?.body ?? "You shouldn't be seeing this"
+                text: notif.notification?.summary + "\n" + notif.notification?.body ?? "You shouldn't be seeing this"
             }
 
             Behavior on opacity {
                 NumberAnimation {duration: 200}
             }
         }
-        
     }
 
-    Component{
-        id: notifComp
-        Notif{}
-    }
     Connections{
         target: NotifService
-        
-        function onNotification(n){
-            console.log(n.summary + ": " + n.body)
 
-            const notif = notifComp.createObject(
-                window.contentItem,
-                {
-                    notification: n
-                }
-            );
+        function onNotification(notif){
+            console.log(notif.summary + ": " + notif.body)
         }
     }
 }

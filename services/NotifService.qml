@@ -7,7 +7,7 @@ import Quickshell.Services.Notifications
 Singleton{
     id: root
 
-    property alias notifications: notifServer.trackedNotifications
+    property alias notifications: notifServer.trackedNotifications 
 
     signal notification(notification: Notification)
     
@@ -24,20 +24,7 @@ Singleton{
         onNotification: notif =>{
             notif.tracked = true       
             root.notification(notif)
-            // content.text = notif.summary + "\n" + notif.body
 
-            // background.x_offset = 0
-            //const comp = notifComp.createObject();
         } 
-    }
-    
-    component Notif: QtObject {
-        id: notif
-    }
-
-    Component {
-        id: notifComp
-
-        Notif {}
     }
 }
