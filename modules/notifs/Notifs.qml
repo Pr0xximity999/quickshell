@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Notifications
 
@@ -52,13 +53,13 @@ Scope{
             required property Notification notification
 
             implicitWidth: Appearance.itemWidth.notification
-            implicitHeight: 100
-            opacity: 0
+            implicitHeight: notifItems.implicitHeight + Appearance.padding.large
             color: Appearance.color.back
 
+            opacity: 0
             x: 0 - x_offset
 
-
+            
             Component.onCompleted: {
                 notif.opacity = 1
             }
@@ -71,7 +72,7 @@ Scope{
 
             Item{
                 Timer {
-                    id: destroyTimer
+                    id: dismisser
                     interval: 200
                     onTriggered: 
                     {
@@ -87,19 +88,46 @@ Scope{
 
                 onClicked: () => {
                     notif.opacity = 0
-                    destroyTimer.running = true
+                    dismisser.start()
                 }
             }
 
-            StyledText{
-                id: content
+            ColumnLayout{
+                id: notifItems
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.extra_small
-                text: notif.notification?.summary + "\n" + notif.notification?.body ?? "You shouldn't be seeing this"
+
+                spacing: Appearance.padding.small
+
+                StyledText{
+                    id: notifTitle
+                    font.pointSize: Appearance.textSize.normal
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: font.pointSize * lineCount
+
+                    text: `${notif.notification?.appName}` +
+                        notif.notification?.summary ?? "You shouldn't be seeing this"
+
+
+                }
+
+                StyledText{
+                    id: notifBody
+                    Layout.fillWidth: true
+                    maximumLineCount: 5
+                    elide: Text.ElideRight //Makes ... if thext is too long
+
+                    text: notif.notification?.body ?? "You shouldn't be seeing this"
+                }
             }
+
+
 
             Behavior on opacity {
                 NumberAnimation {duration: 200}
+            }
+
+            Behavior on x {
+                NumberAnimation {duration: 400}
             }
         }
     }
