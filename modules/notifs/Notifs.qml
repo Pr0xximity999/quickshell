@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Services.Notifications
 
 import qs.components
@@ -53,7 +54,7 @@ Scope{
             required property Notification notification
 
             implicitWidth: Appearance.itemWidth.notification
-            implicitHeight: notifItems.implicitHeight + Appearance.padding.large
+            implicitHeight: notifItemsRow.implicitHeight + Appearance.padding.large
             color: Appearance.color.back
 
             opacity: 0
@@ -92,35 +93,47 @@ Scope{
                 }
             }
 
-            ColumnLayout{
-                id: notifItems
+            RowLayout
+            {
+                id: notifItemsRow
                 anchors.fill: parent
 
-                spacing: Appearance.padding.small
 
-                StyledText{
-                    id: notifTitle
-                    font.pointSize: Appearance.textSize.normal
+                // ClippingRectangle{
+                //     Layout.fillWidth: true
+                //     Layout.fillHeight: true
+                //     Layout.preferredWidth: 100
+                //     Rectangle{
+                //         anchors.fill: parent
+                //         color: "red"
+                //     }
+                // }
+                ColumnLayout{
+                    id: notifItemsColumn
                     Layout.fillWidth: true
-                    Layout.preferredHeight: font.pointSize * lineCount
+                    Layout.fillHeight: true
+                    spacing: Appearance.padding.small
+                    StyledText{
+                        id: notifTitle
+                        font.pointSize: Appearance.textSize.normal
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: font.pointSize * lineCount * 2
 
-                    text: `${notif.notification?.appName}` +
-                        notif.notification?.summary ?? "You shouldn't be seeing this"
+                        text: `${notif.notification?.appName}` +
+                            notif.notification?.summary ?? "You shouldn't be seeing this"
 
+                    }
 
-                }
+                    StyledText{
+                        id: notifBody
+                        Layout.fillWidth: true
+                        maximumLineCount: 5
+                        elide: Text.ElideRight //Makes ... if thext is too long
 
-                StyledText{
-                    id: notifBody
-                    Layout.fillWidth: true
-                    maximumLineCount: 5
-                    elide: Text.ElideRight //Makes ... if thext is too long
-
-                    text: notif.notification?.body ?? "You shouldn't be seeing this"
+                        text: notif.notification?.body ?? "You shouldn't be seeing this"
+                    }
                 }
             }
-
-
 
             Behavior on opacity {
                 NumberAnimation {duration: 200}
