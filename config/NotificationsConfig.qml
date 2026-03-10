@@ -5,6 +5,6 @@ JsonObject{
 
     component Props: JsonObject{
         property int second: 1000
-        property int expiryTimer: 10000
+        property int expiryTimer: 15 * second
     }
 }
