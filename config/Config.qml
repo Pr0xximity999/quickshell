@@ -9,6 +9,7 @@ Singleton {
     id: root
     readonly property alias appearance: adapter.appearance
     readonly property alias service: adapter.service
+    readonly property alias notifications: adapter.notifications
 
     FileView {
         id: file
@@ -25,6 +26,7 @@ Singleton {
             id: adapter
             property AppearanceConfig appearance: AppearanceConfig{}
             property ServiceConfig service: ServiceConfig{}
+            property NotificationsConfig notifications: NotificationsConfig{}
         }
     }
 }

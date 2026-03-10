@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Widgets
 import Quickshell.Services.Notifications
 
 import qs.components
@@ -36,6 +35,7 @@ Scope{
             bottom: 20
         }
 
+        // The actual list of notifications
         ListView{
             id: listview
             model: NotifService.notifications
@@ -47,7 +47,8 @@ Scope{
                 notification: modelData
             }
         }
- 
+
+        // The notification component
         component Notif: StyledRectangle{
             id: notif
             property int x_offset: 0
@@ -80,6 +81,16 @@ Scope{
                         notif.notification.dismiss()
                     }
                 }
+                Timer {
+                    id: expireTimer
+                    running: true
+                    interval: Notifications.props.expiryTimer
+                    repeat: false
+                    onTriggered:{
+                        notif.opacity = 0
+                        notif.notification.dismiss()
+                    }
+                }
             }
 
             MouseArea{        
@@ -97,31 +108,42 @@ Scope{
             {
                 id: notifItemsRow
                 anchors.fill: parent
-
-
-                // ClippingRectangle{
-                //     Layout.fillWidth: true
-                //     Layout.fillHeight: true
-                //     Layout.preferredWidth: 100
-                //     Rectangle{
-                //         anchors.fill: parent
-                //         color: "red"
-                //     }
-                // }
+                
                 ColumnLayout{
                     id: notifItemsColumn
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     spacing: Appearance.padding.small
-                    StyledText{
-                        id: notifTitle
-                        font.pointSize: Appearance.textSize.normal
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: font.pointSize * lineCount * 2
+                    ColumnLayout{
+                        spacing: 0
+                        
+                        RowLayout
+                        {
+                            Image{
+                                visible: notif.notification?.image ?? "" != ""
+                                source: notif.notification.image
+                                Layout.preferredWidth: Appearance.iconSize.small             
+                                Layout.preferredHeight: Appearance.iconSize.small              
+                            }   
+                            StyledText{
+                                id: notifAppname
+                                visible: notif.notification?.appName ?? "" != ""
+                                font.pointSize: Appearance.textSize.normal
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: font.pointSize * lineCount * 2
 
-                        text: `${notif.notification?.appName}` +
-                            notif.notification?.summary ?? "You shouldn't be seeing this"
+                                text: `[${notif.notification.appName}]` 
+                            }
 
+                        }
+                        StyledText{
+                            id: notifSummary
+                            font.pointSize: Appearance.textSize.small
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: font.pointSize * lineCount * 2
+
+                            text: notif.notification?.summary ?? "You shouldn't be seeing this"
+                        }
                     }
 
                     StyledText{
