@@ -8,7 +8,7 @@ Singleton{
     id: root
     property list<MprisPlayer> players : Mpris.players.values
     property list<string> playerNames : players.map((player) => {return player.identity})
-    property MprisPlayer activePlayer: players[0]
+    property MprisPlayer activePlayer: players[0] ?? null
 
     function setActivePlayer(num: int)
     {

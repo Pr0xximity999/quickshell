@@ -17,7 +17,7 @@ Item {
     Timer{
         id: positionUpdater
 
-        running: root.player.isPlaying
+        running: root.player?.isPlaying ?? false
         interval: 500
         repeat: true
 
@@ -40,7 +40,7 @@ Item {
             Layout.preferredWidth: itemColumn.width
             Layout.preferredHeight: 80
 
-            text: root.player.trackTitle ?? "text"  
+            text: root.player?.trackTitle ?? ":3"  
         }
 
         ClippingRectangle{
@@ -58,7 +58,7 @@ Item {
             Image
             {
                 id: trackArt
-                source: root.player.trackArtUrl
+                source: root.player?.trackArtUrl ?? ""
                 property string previousSource: ""
                 
 
@@ -81,11 +81,11 @@ Item {
                     id: pauseArea
                     anchors.fill: parent
                     onClicked: () => {
-                        root.player.togglePlaying();
+                        root.player?.togglePlaying();
                     }
                     onWheel: (mouse) => {
                         trackArt.rotation += mouse.angleDelta.y / 20;
-                        root.player.seek(mouse.angleDelta.y / 30);
+                        root.player?.seek(mouse.angleDelta.y / 30);
                     }
                 }
             }
@@ -96,14 +96,14 @@ Item {
                 to: 360
                 loops: Animation.Infinite
                 duration: 30000
-                paused: !root.player.isPlaying
+                paused: !root.player?.isPlaying
             }
             
         }
 
         StyledText{
             id: artistName
-            text: root.player.trackArtist
+            text: root.player?.trackArtist ?? ""
             Layout.preferredWidth: trackArt.width
         }
 
@@ -113,11 +113,11 @@ Item {
             height: 15
             Column{
                 StyledText{
-                    text: `${Calculations.formatSeconds(root.player.position, "mm:ss")}/${Calculations.formatSeconds(root.player.length, "mm:ss")}`
+                    text: `${Calculations.formatSeconds(root.player?.position ?? 0, "mm:ss")}/${Calculations.formatSeconds(root.player?.length ?? 0, "mm:ss")}`
                 }
                 StyledProgressBar{
-                    max: root.player.length
-                    current: root.player.position
+                    max: root.player?.length ?? 0
+                    current: root.player?.position ?? 0
                     
                     width: musicProgress.width
                     height: 5
