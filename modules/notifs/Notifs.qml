@@ -165,7 +165,7 @@ Scope{
                         id: durationBar
 
                         Layout.preferredHeight: Appearance.padding.extra_small
-                        Layout.preferredWidth: parent.width - Appearance.padding.extra_small
+                        Layout.preferredWidth: notifItemsColumn.width - Appearance.padding.extra_small
 
                         color: Appearance.color.light
 
