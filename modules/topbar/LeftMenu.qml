@@ -11,7 +11,6 @@ RowLayout {
     spacing: Appearance.padding.extra_small
 
     StyledButton {
-        id: container1
         implicitWidth: Appearance.containerSize.medium
         implicitHeight: Appearance.containerSize.small
         color: Appearance.color.purple
@@ -26,7 +25,6 @@ RowLayout {
     }
 
     StyledButton {
-        id: container2
         implicitWidth: Appearance.containerSize.medium
         implicitHeight: Appearance.containerSize.small
         color: Appearance.color.red
@@ -37,6 +35,54 @@ RowLayout {
         Process {
             id: lockProc
             command: ["hyprlock"]
+        }
+    }
+
+    StyledButton {
+        id: sunsetButton
+        property bool isSunset: true
+        implicitWidth: Appearance.containerSize.medium
+        implicitHeight: Appearance.containerSize.small
+        color: isSunset ? Appearance.color.yellow : Appearance.color.black
+
+        text: !isSunset ? "☀️" : ""
+
+        onClicked: {
+            if(sunsetButton.isSunset)
+            {
+                sunsetStopProc.running = true
+            }
+            else{
+                sunsetStartProc.running = true
+            }
+        }
+
+        Process {
+            id: sunsetCheckProc
+            command: [ "pgrep", "-x", "hyprsunset" ]
+            stdout: StdioCollector {
+                onStreamFinished: sunsetButton.isSunset = this.text != ""
+            }
+            running: false
+        }
+
+        Process{
+            id: sunsetStartProc
+            command: ["hyprsunset"]
+            running: false
+        }
+
+        Process{
+            id: sunsetStopProc
+            command: ["pkill", "hyprsunset"]
+            running: false
+        }
+
+        Timer{
+            interval: 500
+            running: true
+            repeat: true
+            onTriggered: sunsetCheckProc.running = true
         }
     }
 

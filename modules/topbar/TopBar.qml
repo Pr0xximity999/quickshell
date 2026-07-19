@@ -36,7 +36,7 @@ Variants {
                 width: Screen.width
                 height: 45
 
-                LeftMenu {
+                LeftMenu { 
                     id: leftMenu
 
                     anchors {
