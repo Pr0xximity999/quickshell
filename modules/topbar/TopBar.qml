@@ -4,8 +4,8 @@ import Quickshell.Io
 import QtQuick.Layouts
 import Quickshell.Hyprland
 
-import qs.config
 import qs.components
+import qs.config
 
 Variants {
     model: Quickshell.screens
@@ -39,8 +39,8 @@ Variants {
                 width: Screen.width
                 height: 45
 
-                RowLayout {
-                    spacing: Appearance.padding.extra_small
+                LeftMenu {
+                    id: leftMenu
 
                     anchors {
                         left: parent.left
@@ -49,64 +49,25 @@ Variants {
                         leftMargin: Appearance.padding.extra_small
                         topMargin: Appearance.padding.extra_small
                     }
+                }
 
-                    StyledButton {
-                        id: container1
-                        implicitWidth: Appearance.containerSize.medium
-                        implicitHeight: Appearance.containerSize.small
-                        color: Appearance.color.purple
+                MiddleMenu {
+                    id: middleMenu
 
-                        text: "🌕"
-
-                        onClicked: sleepProc.running = true
-                        Process {
-                            id: sleepProc
-                            command: ["systemctl", "suspend"]
-                        }
-                    }
-
-                    StyledButton {
-                        id: container2
-                        implicitWidth: Appearance.containerSize.medium
-                        implicitHeight: Appearance.containerSize.small
-                        color: Appearance.color.red
-                        palette.buttonText: Appearance.color.black
-                        text: ""
-
-                        onClicked: lockProc.running = true
-                        Process {
-                            id: lockProc
-                            command: ["hyprlock"]
-                        }
-                    }
-
-                    Repeater {
-                        model: 10
-
-                        StyledButton {
-                            required property int modelData
-                            property HyprlandWorkspace ws: Hyprland.workspaces.values.find(w => w.id == modelData + 1) ?? null
-
-                            implicitWidth: Appearance.containerSize.medium
-                            implicitHeight: Appearance.containerSize.small
-                            highlighted: ws?.active ?? false
-                            visible: (ws?.active ?? false) || modelData < 3
-
-                            palette.buttonText: Appearance.color.black
-                            font.bold: true
-
-                            text: modelData + 1
-                            onClicked: Hyprland.dispatch(`hl.dsp.focus({workspace = ${modelData + 1}})`)
-                        }
+                    anchor {
+                        window: window
                     }
                 }
-            }
 
-            MiddleMenu {
-                id: middleMenu
+                RightMenu {
+                    id: rightmenu
 
-                anchor {
-                    window: window
+                    anchors {
+                        right: parent.right
+                        top: parent.top
+                        rightMargin: Appearance.padding.extra_small
+                        topMargin: Appearance.padding.extra_small
+                    }
                 }
             }
         }
