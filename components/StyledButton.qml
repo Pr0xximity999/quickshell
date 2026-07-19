@@ -17,7 +17,7 @@ Button {
 
     color: hovered && !highlighted ? Appearance.color.grey : otherColor
     
-    background: Rectangle{
+    background: StyledRectangle{
         id: background
         color: root.otherColor
     }

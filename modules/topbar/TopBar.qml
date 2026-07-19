@@ -1,10 +1,11 @@
 import QtQuick
 import Quickshell
-import QtCore
+import Quickshell.Io
+import QtQuick.Layouts
+import Quickshell.Hyprland
 
-import qs.modules.topbar.panels
 import qs.config
-
+import qs.components
 
 Variants {
     model: Quickshell.screens
@@ -12,93 +13,101 @@ Variants {
     Scope {
         id: root
         required property ShellScreen modelData
-        
+
         PanelWindow {
             id: window
-            implicitWidth: 800
-            implicitHeight: 400
+            implicitWidth: Screen.width
+            implicitHeight: 45
             color: "transparent"
 
             // Makes the window overlay the screen
-            exclusionMode: ExclusionMode.Ignore
+            //exclusionMode: ExclusionMode.Ignore
 
-            anchors{
+            anchors {
                 top: true
             }
-
-            mask: Region{
+            Region {
+                item: background
+            }
+            mask: Region {
                 item: background
             }
 
-
             Rectangle {
                 id: background
-                width: 300
-                height: 40
-                color: "transparent"
-                bottomLeftRadius: 5
-                bottomRightRadius: 5
-                anchors.horizontalCenter: parent.horizontalCenter
-                border{
-                    color: mouseArea.hovered ?  Appearance.color.front : "transparent"
-                    width: 2
-                }
+                color: Appearance.color.back
+                width: Screen.width
+                height: 45
 
-                HoverHandler {
-                    id: mouseArea
-                }
+                RowLayout {
+                    spacing: Appearance.padding.extra_small
 
-                Panels{
-                    id: panels
-                    width: parent.width
-                    height: parent.height
-                }
-                
+                    anchors {
+                        left: parent.left
+                        top: parent.top
 
-                states: [
-                    State {
-                        id: state1
-                        name: "focussed"
-                        when: mouseArea.hovered
-                        PropertyChanges {
-                            background.width: 480
-                            background.height: 400
-                            background.color: Appearance.color.back
-                            panels.media.opacity: 1
-                            panels.testing_zone.opacity: 1
-                            panels.media.width: 150
-                            panels.anchors.margins: Appearance.padding.small
+                        leftMargin: Appearance.padding.extra_small
+                        topMargin: Appearance.padding.extra_small
+                    }
+
+                    StyledButton {
+                        id: container1
+                        implicitWidth: Appearance.containerSize.medium
+                        implicitHeight: Appearance.containerSize.small
+                        color: Appearance.color.purple
+
+                        text: "🌕"
+
+                        onClicked: sleepProc.running = true
+                        Process {
+                            id: sleepProc
+                            command: ["systemctl", "suspend"]
                         }
                     }
-                ]
 
-                transitions: [
-                    Transition {
-                        to: "focussed"
-                        reversible: true
-                        SequentialAnimation {
-                            ColorAnimation {
-                                properties: "color"
-                                duration: 2 //Instant, lower than 2 makes it not work
-                            }
-                            NumberAnimation {
-                                properties: "height, y, margins, radius"
-                                duration: 200
-                                easing.type: Easing.InOutQuad
-                            }
-                            NumberAnimation {
-                                properties: "width"
-                                duration: 100
-                                easing.type: Easing.Bezier
-                            }
-                            NumberAnimation {
-                                properties: "opacity"
-                                duration: 200
-                                easing.type: Easing.Bezier
-                            }
+                    StyledButton {
+                        id: container2
+                        implicitWidth: Appearance.containerSize.medium
+                        implicitHeight: Appearance.containerSize.small
+                        color: Appearance.color.red
+                        palette.buttonText: Appearance.color.black
+                        text: ""
+
+                        onClicked: lockProc.running = true
+                        Process {
+                            id: lockProc
+                            command: ["hyprlock"]
                         }
                     }
-                ]
+
+                    Repeater {
+                        model: 10
+
+                        StyledButton {
+                            required property int modelData
+                            property HyprlandWorkspace ws: Hyprland.workspaces.values.find(w => w.id == modelData + 1) ?? null
+
+                            implicitWidth: Appearance.containerSize.medium
+                            implicitHeight: Appearance.containerSize.small
+                            highlighted: ws?.active ?? false
+                            visible: (ws?.active ?? false) || modelData < 3
+
+                            palette.buttonText: Appearance.color.black
+                            font.bold: true
+
+                            text: modelData + 1
+                            onClicked: Hyprland.dispatch(`hl.dsp.focus({workspace = ${modelData + 1}})`)
+                        }
+                    }
+                }
+            }
+
+            MiddleMenu {
+                id: middleMenu
+
+                anchor {
+                    window: window
+                }
             }
         }
     }
