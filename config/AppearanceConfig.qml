@@ -22,7 +22,7 @@ JsonObject {
 
     component ContainerSize: JsonObject {
         property int scale: 1
-        property int extra_small: 10 * scale
+        property int extra_small: 20 * scale
         property int small: 30 * scale
         property int medium: 50 * scale
         property int large: 100 * scale
@@ -59,6 +59,7 @@ JsonObject {
         property string purple: '#D699B6'
         property string blue: '#7FBBB3'
         property string red: '#E67E80'
+        property string yellow: '#DFA000'
 
         property string back: primary
         property string front: secondary
