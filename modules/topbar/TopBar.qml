@@ -20,9 +20,6 @@ Variants {
             implicitHeight: 45
             color: "transparent"
 
-            // Makes the window overlay the screen
-            //exclusionMode: ExclusionMode.Ignore
-
             anchors {
                 top: true
             }
