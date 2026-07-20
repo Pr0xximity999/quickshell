@@ -1,3 +1,6 @@
+pragma ComponentBehavior: Bound
+
+import Quickshell
 import Quickshell.Services.SystemTray
 
 import QtQuick
@@ -9,13 +12,19 @@ import qs.components
 RowLayout {
     id: root
     spacing: Appearance.padding.extra_small
+    required property PanelWindow windowRoot
 
     StyledRectangle {
+        id: tray
         height: Appearance.containerSize.small
-        width: Appearance.containerSize.large
-
+        Layout.preferredWidth: trayLayout.implicitWidth
+     
         RowLayout {
+            id: trayLayout
+            layoutDirection: Qt.RightToLeft
+            spacing: 0
 
+            anchors.horizontalCenter: parent.horizontalCenter
             Repeater {
                 model: SystemTray.items
 
@@ -23,33 +32,26 @@ RowLayout {
                     id: trayItem
                     required property SystemTrayItem modelData
 
-                    color: Appearance.color.black
-                    height: Appearance.containerSize.extra_small + 2
-                    width: Appearance.containerSize.extra_small + 2
+                    implicitHeight: Appearance.containerSize.extra_small
+                    implicitWidth: Appearance.containerSize.extra_small
 
                     Image {
                         source: trayItem.modelData.icon
                         fillMode: Image.PreserveAspectCrop
-                        sourceSize {
-                            width: parent.width
-                            height: parent.height
-                        }
+                        anchors.fill: parent
+                    }
 
-                        MouseArea {
-                            id: clickarea
-                            anchors.fill: parent
-                            acceptedButtons: Qt.LeftButton | Qt.RightButton
-                          
+                    MouseArea {
+                        id: clickarea
+                        anchors.fill: parent
+                        acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-                            onClicked: function(mouse){
-                              console.log(trayItem.modelData.hasMenu)
-                              if(mouse.button == Qt.RightButton)
-                              {
-                                trayItem.modelData.activate();
-                              }
-                              else{
+                        onClicked: function (mouse) {
+                            var pos = mapToGlobal(mouse.x, mouse.y);
+                            if (mouse.button == Qt.RightButton) {
+                                trayItem.modelData.display(root.windowRoot, pos.x, pos.y);
+                            } else {
                                 trayItem.modelData.secondaryActivate();
-                              }
                             }
                         }
                     }

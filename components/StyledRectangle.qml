@@ -20,7 +20,6 @@ Rectangle{
 
         contentItem: Item{
             id: container
-
         }
     }
 }

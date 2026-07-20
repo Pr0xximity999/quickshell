@@ -1,10 +1,6 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
-import QtQuick.Layouts
-import Quickshell.Hyprland
 
-import qs.components
 import qs.config
 
 Variants {
@@ -58,7 +54,7 @@ Variants {
 
                 RightMenu {
                     id: rightmenu
-
+                    windowRoot: window
                     anchors {
                         right: parent.right
                         top: parent.top

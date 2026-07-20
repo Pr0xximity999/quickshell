@@ -22,7 +22,8 @@ JsonObject {
 
     component ContainerSize: JsonObject {
         property int scale: 1
-        property int extra_small: 20 * scale
+        property int extra_extra_small: 20 * scale
+        property int extra_small: 25 * scale
         property int small: 30 * scale
         property int medium: 50 * scale
         property int large: 100 * scale
