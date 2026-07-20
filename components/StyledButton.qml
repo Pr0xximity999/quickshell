@@ -14,11 +14,19 @@ Button {
     property alias border: background.border
 
     readonly property string otherColor: highlighted ?  Appearance.color.selected : Appearance.color.unselected
-
     color: hovered && !highlighted ? Appearance.color.grey : otherColor
     
     background: StyledRectangle{
         id: background
         color: root.otherColor
+        anchors.fill: parent
+    }
+    
+    // Needed since otherwise the text is displayed underneath the rectangle for some reason
+    contentItem: Text{
+        text: root.text
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        font: root.font
     }
 }
