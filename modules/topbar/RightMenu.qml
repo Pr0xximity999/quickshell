@@ -24,6 +24,8 @@ RowLayout {
         SystemTray {
             id: systemTray
             windowRoot: root.windowRoot
+
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 

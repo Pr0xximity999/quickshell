@@ -16,7 +16,6 @@ RowLayout {
     layoutDirection: Qt.RightToLeft
     spacing: 0
 
-    anchors.horizontalCenter: parent.horizontalCenter
     Repeater {
         model: SystemTray.items
 
