@@ -24,10 +24,10 @@ JsonObject {
         property int scale: 1
         property int extra_extra_small: 20 * scale
         property int extra_small: 25 * scale
-        property int small: 30 * scale
+        property int small: 35 * scale
         property int medium: 50 * scale
-        property int large: 100 * scale
-        property int extra_large: 200 * scale
+        property int large: 70 * scale
+        property int extra_large: 100 * scale
     }
 
     component IconSize: JsonObject {

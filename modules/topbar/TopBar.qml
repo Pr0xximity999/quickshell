@@ -13,7 +13,7 @@ Variants {
         PanelWindow {
             id: window
             implicitWidth: Screen.width
-            implicitHeight: 45
+            implicitHeight: Appearance.containerSize.medium
             color: "transparent"
 
             anchors {
