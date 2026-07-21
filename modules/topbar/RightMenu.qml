@@ -8,17 +8,19 @@ import QtQuick.Layouts
 
 import qs.config
 import qs.components
+import qs.modules.topbar.widgets
 
 RowLayout {
     id: root
     spacing: Appearance.padding.extra_small
     required property PanelWindow windowRoot
+    layoutDirection: Qt.RightToLeft
 
     StyledRectangle {
         id: tray
         height: Appearance.containerSize.small
         Layout.preferredWidth: trayLayout.implicitWidth
-     
+
         RowLayout {
             id: trayLayout
             layoutDirection: Qt.RightToLeft
@@ -57,6 +59,18 @@ RowLayout {
                     }
                 }
             }
+        }
+    }
+
+    StyledRectangle {
+
+        implicitWidth: Appearance.containerSize.large
+        implicitHeight: Appearance.containerSize.small
+
+        color: Appearance.color.red
+
+        Volume {
+            anchors.fill: parent
         }
     }
 }
