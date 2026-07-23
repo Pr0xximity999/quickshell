@@ -21,7 +21,7 @@ RowLayout {
         height: Appearance.containerSize.small
         Layout.preferredWidth: systemTray.implicitWidth
 
-        SystemTray {
+        SystemTrayWidget {
             id: systemTray
             windowRoot: root.windowRoot
 
@@ -30,13 +30,13 @@ RowLayout {
     }
 
     StyledRectangle {
-
+        id: volume
         implicitWidth: Appearance.containerSize.large
         implicitHeight: Appearance.containerSize.small
 
         color: Appearance.color.red
 
-        Volume {
+        VolumeWidget {
             anchors.fill: parent
         }
     }

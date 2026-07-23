@@ -60,7 +60,9 @@ JsonObject {
         property string purple: '#D699B6'
         property string blue: '#7FBBB3'
         property string red: '#E67E80'
+        property string orange: '#E69875'
         property string yellow: '#DFA000'
+        property string green: '#A7C080'
 
         property string back: primary
         property string front: secondary

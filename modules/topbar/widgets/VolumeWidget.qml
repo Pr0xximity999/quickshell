@@ -1,3 +1,4 @@
+import Quickshell
 import Quickshell.Services.Pipewire
 import QtQuick
 
@@ -26,15 +27,25 @@ Item {
         font.bold: true
         text: root.icon + " " + Math.round(root.volume * 100) + "%"
     }
- 
+
     MouseArea {
         anchors.fill: parent
-        onClicked: root.sink.audio.muted = !root.muted
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onClicked: mouse => {
+            if(mouse.button == Qt.LeftButton)
+            {
+                root.sink.audio.muted = !root.muted;
+            }
+            else if (mouse.button == Qt.RightButton)
+            {
+                Quickshell.execDetached(["pavucontrol", "-t", "3"])
+            }
+        }
 
         onWheel: wheel => {
-            const step = 0.05
-            const delta = wheel.angleDelta.y > 0 ? step : -step
-            root.sink.audio.volume = Math.max(0, Math.min(1, root.sink.audio.volume + delta))
+            const step = 0.05;
+            const delta = wheel.angleDelta.y > 0 ? step : -step;
+            root.sink.audio.volume = Math.max(0, Math.min(1, root.sink.audio.volume + delta));
         }
     }
     PwObjectTracker {
