@@ -56,6 +56,7 @@ JsonObject {
         property string grey: "#868D80"
         property string lightGrey: "#C8BA9E"
         property string light: "#A7C080"
+        property string white: '#D3C6AA'
         property string black: '#1a1f22'
         property string purple: '#D699B6'
         property string blue: '#7FBBB3'

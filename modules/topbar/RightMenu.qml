@@ -16,9 +16,24 @@ RowLayout {
     required property PanelWindow windowRoot
     layoutDirection: Qt.RightToLeft
 
+    StyledButton {
+        id: power
+        implicitWidth: Appearance.containerSize.small
+        implicitHeight: Appearance.containerSize.small
+
+        color: Appearance.color.black
+        textColor: Appearance.color.white
+
+        font {
+            bold: true
+            pointSize: 18
+        }
+        
+        text: "󰐥"
+    }
     StyledRectangle {
         id: tray
-        height: Appearance.containerSize.small
+        implicitHeight: Appearance.containerSize.small
         Layout.preferredWidth: systemTray.implicitWidth
 
         SystemTrayWidget {

@@ -5,6 +5,7 @@ import qs.config
 
 Button {
     id: root
+    property alias textColor: text.color
     property alias color: background.color
     property alias radius: background.radius
     property alias topRightRadius: background.topRightRadius
@@ -15,7 +16,6 @@ Button {
 
     readonly property string otherColor: highlighted ?  Appearance.color.selected : Appearance.color.unselected
     color: hovered && !highlighted ? Appearance.color.grey : otherColor
-    
     background: StyledRectangle{
         id: background
         color: root.otherColor
@@ -24,6 +24,7 @@ Button {
     
     // Needed since otherwise the text is displayed underneath the rectangle for some reason
     contentItem: Text{
+        id: text
         text: root.text
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
