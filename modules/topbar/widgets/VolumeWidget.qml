@@ -6,8 +6,8 @@ Item {
     id: root
     property PwNode sink: Pipewire.defaultAudioSink
 
-    readonly property bool muted: sink.ready && (sink?.audio?.muted ?? false)
-    readonly property real volume: sink.ready ? (sink?.audio?.volume ?? 0) : 0
+    readonly property bool muted: (sink?.ready ?? false) && (sink?.audio?.muted ?? false)
+    readonly property real volume: (sink?.ready ?? false) ? (sink?.audio?.volume ?? 0) : 0
 
     readonly property string icon: {
         if (root.muted)

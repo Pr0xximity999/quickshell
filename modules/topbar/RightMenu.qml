@@ -16,21 +16,12 @@ RowLayout {
     required property PanelWindow windowRoot
     layoutDirection: Qt.RightToLeft
 
-    StyledButton {
-        id: power
+    PowerButtonWidget {
+       id: power
         implicitWidth: Appearance.containerSize.small
         implicitHeight: Appearance.containerSize.small
-
-        color: Appearance.color.black
-        textColor: Appearance.color.white
-
-        font {
-            bold: true
-            pointSize: 18
-        }
-        
-        text: "󰐥"
     }
+
     StyledRectangle {
         id: tray
         implicitHeight: Appearance.containerSize.small
