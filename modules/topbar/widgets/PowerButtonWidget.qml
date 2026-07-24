@@ -62,6 +62,7 @@ StyledButton {
         id: powerWindow
         color: Appearance.color.transparent
 
+        exclusionMode: ExclusionMode.Ignore
         implicitWidth: 400
         implicitHeight: width
 
@@ -87,7 +88,10 @@ StyledButton {
             textColor: Appearance.color.white
             font.pointSize: 160
 
-            onClicked: Quickshell.execDetached("poweroff")
+            onClicked: {
+                powerWindowBg.color = "black";
+                Quickshell.execDetached("poweroff");
+            }
 
             HoverHandler {
                 id: hover
@@ -97,6 +101,12 @@ StyledButton {
                     } else {
                         powerWindow.margins.right = -powerWindow.width / 2;
                     }
+                }
+            }
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 1000
                 }
             }
         }

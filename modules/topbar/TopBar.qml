@@ -24,7 +24,7 @@ Variants {
 
             // So i can see waybar
             margins {
-                top: 40
+                top: 0
             }
 
             mask: Region {
