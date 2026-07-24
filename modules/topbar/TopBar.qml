@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell.Wayland
 import Quickshell
 
 import qs.config
@@ -15,13 +16,12 @@ Variants {
             implicitWidth: Screen.width
             implicitHeight: Appearance.containerSize.medium
             color: "transparent"
+            WlrLayershell.layer: WlrLayer.Bottom    
 
             anchors {
                 top: true
             }
-            Region {
-                item: background
-            }
+            
             mask: Region {
                 item: background
             }
