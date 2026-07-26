@@ -2,7 +2,7 @@ import QtQuick
 
 import qs.config
 import qs.components
-import qs.modules.topbar.widgets
+import qs.widgets
 
 StyledRectangle{
     id: root

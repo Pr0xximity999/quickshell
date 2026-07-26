@@ -8,7 +8,7 @@ import QtQuick.Layouts
 
 import qs.config
 import qs.components
-import qs.modules.topbar.widgets
+import qs.widgets
 
 RowLayout {
     id: root
@@ -43,6 +43,18 @@ RowLayout {
         color: Appearance.color.red
 
         VolumeWidget {
+            anchors.fill: parent
+        }
+    }
+
+    StyledRectangle {
+        id: bluetooth
+        implicitWidth: Appearance.containerSize.large
+        implicitHeight: Appearance.containerSize.small
+
+        color: Appearance.color.lightblue
+
+        BluetoothWidget {
             anchors.fill: parent
         }
     }
