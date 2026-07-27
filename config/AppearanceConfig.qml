@@ -1,4 +1,5 @@
 import Quickshell.Io
+import qs.config
 
 JsonObject {
     property TextSize textSize: TextSize {}
@@ -49,6 +50,7 @@ JsonObject {
     }
 
     component Color: JsonObject {
+        property string test: Themer.json.colors.color0
         property string debug: "#32ED75ff"
         property string transparent: "transparent"
         property string primary: "#2D353B"

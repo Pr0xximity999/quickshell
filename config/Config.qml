@@ -22,11 +22,13 @@ Singleton {
         // Save data if changes are made to properties
         onAdapterUpdated: writeAdapter()
 
-        JsonAdapter{
+        onSaved: console.log("Changes written to config file")
+
+        JsonAdapter {
             id: adapter
-            property AppearanceConfig appearance: AppearanceConfig{}
-            property ServiceConfig service: ServiceConfig{}
-            property NotificationsConfig notifications: NotificationsConfig{}
+            property AppearanceConfig appearance: AppearanceConfig {}
+            property ServiceConfig service: ServiceConfig {}
+            property NotificationsConfig notifications: NotificationsConfig {}
         }
     }
 }
