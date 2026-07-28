@@ -18,11 +18,13 @@ Singleton {
         // Updates data if file changed
         watchChanges: true
         onFileChanged: reload()
-
+        blockWrites: true
+        
         // Save data if changes are made to properties
         onAdapterUpdated: writeAdapter()
 
-        onSaved: console.log("Changes written to config file")
+        onSaveFailed: (err) => console.log(`Writing to config file failed: ${err}`)
+        onLoadFailed: (err) => console.log(`Loading config file failed: ${err}`)
 
         JsonAdapter {
             id: adapter

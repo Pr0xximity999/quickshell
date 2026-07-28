@@ -36,7 +36,7 @@ Variants {
 
             Rectangle {
                 id: background
-                color: Appearance.color.back
+                color: Appearance.color.primary
                 width: Screen.width
                 height: 45
             }

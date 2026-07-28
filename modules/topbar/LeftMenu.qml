@@ -15,7 +15,7 @@ RowLayout {
     StyledButton {
         implicitWidth: Appearance.containerSize.medium
         implicitHeight: Appearance.containerSize.small
-        color: Appearance.color.purple
+        color: Appearance.color.magenta
 
         text: "🌕"
 

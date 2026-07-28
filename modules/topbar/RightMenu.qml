@@ -52,7 +52,7 @@ RowLayout {
         implicitWidth: Appearance.containerSize.large
         implicitHeight: Appearance.containerSize.small
 
-        color: Appearance.color.lightblue
+        color: Appearance.color.blue
 
         BluetoothWidget {
             anchors.fill: parent

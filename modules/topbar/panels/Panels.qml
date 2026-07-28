@@ -4,8 +4,9 @@ import QtQuick.Layouts
 
 import qs.config
 import qs.components
+import qs.widgets
 
-Item{
+Item {
     id: root
     readonly property alias clock: clockPanel
     readonly property alias testing_zone: testing_zone
@@ -15,27 +16,38 @@ Item{
     anchors.fill: parent
     anchors.margins: Appearance.padding.extra_small
 
-    RowLayout{
+    RowLayout {
         id: itemRow
         spacing: 10
         height: root.height
         width: root.width
-        anchors{
+        anchors {
             top: root.top
             horizontalCenter: root.horizontalCenter
         }
 
-        ColumnLayout{
+        ColumnLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
             width: 1
-            ClockPanel{
+            StyledRectangle {
                 id: clockPanel
-                Layout.preferredWidth: width
-                Layout.preferredHeight:  35
+
+                color: Appearance.color.front
+
+                implicitWidth: clock.width
+                implicitHeight: Appearance.containerSize.small
                 Layout.alignment: Qt.AlignHCenter
+                
+                ClockWidget {
+                    id: clock
+                    width: text.width + Appearance.padding.medium
+                    height: text.height + Appearance.padding.small
+                    text.font.pointSize: Appearance.textSize.normal
+                    text.wrapMode: Text.Wrap
+                }
             }
-            StyledRectangle{
+           StyledRectangle {
                 id: testing_zone
                 color: Appearance.color.secondary
                 Layout.fillWidth: true
@@ -44,7 +56,7 @@ Item{
             }
         }
 
-        MediaPanel{
+        MediaPanel {
             id: mediaPanel
             width: 0
             Layout.preferredWidth: width
