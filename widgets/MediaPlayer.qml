@@ -40,7 +40,7 @@ Item {
             Layout.preferredWidth: itemColumn.width
             Layout.preferredHeight: 80
 
-            text: root.player?.trackTitle ?? ":3"  
+            text: root.player?.trackTitle ?? "Nothing Playing Right Now."  
         }
 
         ClippingRectangle{
