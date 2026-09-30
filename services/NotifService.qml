@@ -24,7 +24,6 @@ Singleton{
         onNotification: notif =>{
             notif.tracked = true       
             root.notification(notif)
-
         } 
     }
 }

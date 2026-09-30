@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Notifications
 
@@ -7,7 +6,7 @@ import qs.components
 import qs.config
 import qs.services
 
-Scope{
+Scope {
     id: root
     PanelWindow {
         id: window
@@ -19,25 +18,26 @@ Scope{
         exclusionMode: ExclusionMode.Ignore
 
         // Mouse event passtrough
-        mask: Region{
+        mask: Region {
             width: listview.width
             height: listview.contentHeight
         }
 
-        anchors{
+        anchors {
             top: true
-            right:true
-            bottom:true
+            right: true
+            bottom: true
         }
 
-        margins{
+        margins {
             top: 50
             bottom: 20
         }
 
         // The actual list of notifications
-        ListView{
+        ListView {
             id: listview
+
             model: NotifService.notifications
             anchors.fill: parent
             spacing: Appearance.padding.small
@@ -47,153 +47,36 @@ Scope{
                 notification: modelData
             }
         }
+    }
 
-        // The notification component
-        component Notif: StyledRectangle{
-            id: notif
-            property int x_offset: 0
-            required property Notification notification
+    // The notification component
+    component Notif: NotificationBody {
+        id: notif
 
-            implicitWidth: Appearance.itemWidth.notification
-            implicitHeight: notifItemsColumn.implicitHeight + Appearance.padding.large
-            color: Appearance.color.back
+        property int x_offset: 0
+        opacity: 0
+        x: 0 - x_offset
 
-            opacity: 0
-            x: 0 - x_offset
+        implicitWidth: Appearance.itemWidth.notification
+        implicitHeight: notifItemsColumn.implicitHeight + Appearance.padding.large
 
 
-            
-            Component.onCompleted: {
-                notif.opacity = 1
-            }
+        Component.onCompleted: {
+            notif.opacity = 1;
+        }
 
-            border{
-                color: Appearance.color.light
-                width: 2
-            }
-
-            Item{
-                Timer {
-                    id: dismisser
-                    interval: 200
-                    onTriggered: 
-                    {
-                        notif.notification.dismiss()
-                    }
-                }
-                Timer {
-                    id: expireTimer
-                    running: true
-                    interval: Notifications.props.expiryTimer
-                    repeat: false
-                    onTriggered:{
-                        notif.opacity = 0
-                        dismisser.start()
-                    }
-                }
-            }
-
-            // Dismiss mosue area
-            MouseArea{        
-                id: clickarea
-                width: notif?.width
-                height: notif?.height
-
-                onClicked: () => {
-                    notif.opacity = 0
-                    dismisser.start()
-                }
-            }
-
-            // The actual notification visuals
-            ColumnLayout{
-                id: notifItemsColumn
-
-                anchors.fill: parent
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                
-                spacing: Appearance.padding.extra_small
-                ColumnLayout{
-                    spacing: 0
-                    
-                    RowLayout
-                    {
-                        Image{
-                            id: notifIcon
-
-                            visible: notif.notification?.image ?? "" != ""
-                            source: notif.notification.image
-                            Layout.preferredWidth: Appearance.iconSize.small             
-                            Layout.preferredHeight: Appearance.iconSize.small              
-                        }   
-                        StyledText{
-                            id: notifAppname
-
-                            visible: notif.notification?.appName ?? "" != ""
-                            font.pointSize: Appearance.textSize.normal
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: font.pointSize * lineCount * 2
-
-                            text: `[${notif.notification.appName}]` 
-                        }
-
-                    }
-                    StyledText{
-                        id: notifSummary
-
-                        font.pointSize: Appearance.textSize.small
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: font.pointSize * lineCount * 2
-
-                        text: notif.notification?.summary ?? "You shouldn't be seeing this"
-                    }
-                }
-
-                ColumnLayout{
-                    spacing: Appearance.padding.small
-                    StyledText{
-                        id: notifBody
-
-                        Layout.fillWidth: true
-                        maximumLineCount: 5
-                        elide: Text.ElideRight //Makes ... if thext is too long
-
-                        text: notif.notification?.body ?? "You shouldn't be seeing this"
-                    }
-                    Rectangle{
-                        id: durationBar
-
-                        Layout.preferredHeight: Appearance.padding.extra_small
-                        Layout.preferredWidth: notifItemsColumn.width - Appearance.padding.extra_small
-
-                        color: Appearance.color.light
-
-                        Component.onCompleted: {
-                            Layout.preferredWidth = 0
-                        }
-                        Behavior on Layout.preferredWidth {
-                            NumberAnimation {duration: Notifications.props.expiryTimer}
-                        }
-                    }
-                }
-            }
-
-            Behavior on opacity {
-                NumberAnimation {duration: 200}
-            }
-
-            Behavior on x {
-                NumberAnimation {duration: 400}
+        Behavior on x {
+            NumberAnimation {
+                duration: 400
             }
         }
     }
 
-    Connections{
+    Connections {
         target: NotifService
 
-        function onNotification(notif){
-            console.log(notif.summary + ": " + notif.body)
+        function onNotification(notif) {
+            console.log(notif.summary + ": " + notif.body);
         }
     }
 }
