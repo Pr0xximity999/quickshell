@@ -34,7 +34,8 @@ Item {
                 id: dismisser
                 interval: 200
                 onTriggered: {
-                    root.notification.dismiss()
+                    root.visible = false
+                    root.height = 0
                 }
             }
             Timer {

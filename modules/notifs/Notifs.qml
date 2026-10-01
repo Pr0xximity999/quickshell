@@ -40,7 +40,6 @@ Scope {
 
             model: NotifService.notifications
             anchors.fill: parent
-            spacing: Appearance.padding.small
 
             delegate: Notif {
                 required property Notification modelData
@@ -50,12 +49,13 @@ Scope {
     }
 
     // The notification component
-    component Notif: NotificationBody {
+    component Notif: NotificationElement {
         id: notif
 
         property int x_offset: 0
         opacity: 0
         x: 0 - x_offset
+        anchors.margins: 100
 
         implicitWidth: Appearance.itemWidth.notification
         implicitHeight: notifItemsColumn.implicitHeight + Appearance.padding.large
