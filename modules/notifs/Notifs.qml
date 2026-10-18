@@ -51,7 +51,6 @@ Scope {
     // The notification component
     component Notif: NotificationElement {
         id: notif
-
         property int x_offset: 0
         opacity: 0
         x: 0 - x_offset
@@ -59,6 +58,10 @@ Scope {
         implicitWidth: Appearance.itemWidth.notification
         implicitHeight: notifItemsColumn.implicitHeight + Appearance.padding.large
 
+        border {
+            color: Appearance.color.light
+            width: 2
+        }
 
         Component.onCompleted: {
             notif.opacity = 1;
@@ -68,14 +71,6 @@ Scope {
             NumberAnimation {
                 duration: 400
             }
-        }
-    }
-
-    Connections {
-        target: NotifService
-
-        function onNotification(notif) {
-            console.log(notif.summary + ": " + notif.body);
         }
     }
 }

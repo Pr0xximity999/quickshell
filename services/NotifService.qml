@@ -4,15 +4,15 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Notifications
 
-Singleton{
+Singleton {
     id: root
 
-    property alias notifications: notifServer.trackedNotifications 
+    property alias notifications: notifServer.trackedNotifications
 
     signal notification(notification: Notification)
-    
-    NotificationServer{
-        id: notifServer                    
+
+    NotificationServer {
+        id: notifServer
         actionsSupported: false
         bodySupported: true
         bodyMarkupSupported: true
@@ -21,9 +21,11 @@ Singleton{
         persistenceSupported: false
         imageSupported: true
 
-        onNotification: notif =>{
-            notif.tracked = true       
-            root.notification(notif)
-        } 
+        onNotification: notif => {
+            notif.tracked = true;
+            root.notification(notif);
+
+            console.log(notif.summary + ": " + notif.body);
+        }
     }
 }

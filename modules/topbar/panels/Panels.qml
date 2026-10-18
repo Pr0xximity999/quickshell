@@ -9,7 +9,7 @@ import qs.widgets
 Item {
     id: root
     readonly property alias clock: clockPanel
-    readonly property alias testing_zone: testing_zone
+    readonly property alias notificationCenter: notificationCenter
     readonly property alias media: mediaPanel
     property alias itemRow: itemRow
 
@@ -38,7 +38,7 @@ Item {
                 implicitWidth: clock.width
                 implicitHeight: Appearance.containerSize.small
                 Layout.alignment: Qt.AlignHCenter
-                
+
                 ClockWidget {
                     id: clock
                     width: text.width + Appearance.padding.medium
@@ -47,8 +47,8 @@ Item {
                     text.wrapMode: Text.Wrap
                 }
             }
-           StyledRectangle {
-                id: testing_zone
+            NotificationCenter {
+                id: notificationCenter
                 color: Appearance.color.secondary
                 Layout.fillWidth: true
                 Layout.fillHeight: true

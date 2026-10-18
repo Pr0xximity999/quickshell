@@ -38,7 +38,7 @@ Rectangle {
                 root.height: 400
                 root.color: Appearance.color.back
                 panels.media.opacity: 1
-                panels.testing_zone.opacity: 1
+                panels.notificationCenter.opacity: 1
                 panels.media.width: 150
                 panels.anchors.margins: Appearance.padding.small
             }

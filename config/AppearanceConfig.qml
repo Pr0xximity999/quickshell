@@ -45,11 +45,11 @@ JsonObject {
 
     component Padding: JsonObject {
         property int scale: 1
-        property int extra_small: 5
-        property int small: 10
-        property int medium: 20
-        property int large: 30
-        property int extra_large: 40
+        property int extra_small: 5 * scale
+        property int small: 10 * scale
+        property int medium: 20 * scale
+        property int large: 30 * scale
+        property int extra_large: 40 * scale
     }
 
     component Color: JsonObject {
